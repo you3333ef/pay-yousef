@@ -91,32 +91,35 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     logo: '/logos/aramex.svg',
     logoDark: '/logos/aramex-dark.svg',
     colors: {
-      primary: '#EB5B00',
+      primary: '#E31E24',
       secondary: '#FF6B35',
       accent: '#FFFFFF',
-      background: '#F8F9FA',
+      background: '#F5F5F5',
       surface: '#FFFFFF',
-      text: '#212529',
-      textSecondary: '#6C757D',
-      border: '#DEE2E6',
-      button: '#EB5B00',
-      buttonHover: '#D04E00',
+      text: '#1A1A1A',
+      textSecondary: '#6B6B6B',
+      border: '#E0E0E0',
+      button: '#E31E24',
+      buttonHover: '#C41E3A',
       buttonText: '#FFFFFF',
       inputBg: '#FFFFFF',
-      inputBorder: '#CED4DA',
-      success: '#28A745',
-      warning: '#FFC107',
-      error: '#DC3545'
+      inputBorder: '#CCCCCC',
+      success: '#00A651',
+      warning: '#FFB81C',
+      error: '#E31837',
+      gradientFrom: '#E31E24',
+      gradientTo: '#FF6B35'
     },
     fonts: {
-      family: "'DIN Next', 'Cairo', 'Tajawal', Arial, sans-serif",
+      family: "'DIN Next', 'Cairo', 'Tajawal', 'Arial', sans-serif",
       sizes: {
-        xs: '11px',
-        sm: '13px',
+        xs: '12px',
+        sm: '14px',
         base: '16px',
         lg: '18px',
         xl: '24px',
-        xxl: '32px'
+        xxl: '32px',
+        xxxl: '40px'
       },
       weights: {
         normal: 400,
@@ -139,6 +142,7 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
       md: '6px',
       lg: '8px',
       xl: '12px',
+      xxl: '16px',
       full: '50%'
     },
     style: {
@@ -146,7 +150,10 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
       formField: 'outlined',
       shadow: 'light',
       hasGradient: true,
-      gradientDirection: 'horizontal'
+      gradientDirection: 'horizontal',
+      cardShadow: '0 4px 12px rgba(227, 30, 36, 0.08)',
+      headerHeight: '80px',
+      cardMaxWidth: '560px'
     },
     responsive: {
       mobileBreakpoint: '768px',
@@ -243,30 +250,33 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     colors: {
       primary: '#FFCC00',
       secondary: '#D40511',
-      accent: '#000000',
-      background: '#FFFFFF',
-      surface: '#F5F5F5',
+      accent: '#FF0000',
+      background: '#FAFAFA',
+      surface: '#FFFFFF',
       text: '#000000',
-      textSecondary: '#666666',
-      border: '#E0E0E0',
+      textSecondary: '#4A4A4A',
+      border: '#E5E5E5',
       button: '#D40511',
-      buttonHover: '#B3030D',
+      buttonHover: '#BB0410',
       buttonText: '#FFFFFF',
       inputBg: '#FFFFFF',
       inputBorder: '#CCCCCC',
       success: '#00752E',
       warning: '#FFA500',
-      error: '#E60012'
+      error: '#E60012',
+      gradientFrom: '#FFCC00',
+      gradientTo: '#D40511'
     },
     fonts: {
-      family: "'Helvetica', 'DHL', Arial, sans-serif",
+      family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
       sizes: {
-        xs: '11px',
-        sm: '13px',
-        base: '15px',
+        xs: '12px',
+        sm: '14px',
+        base: '16px',
         lg: '18px',
         xl: '24px',
-        xxl: '30px'
+        xxl: '30px',
+        xxxl: '36px'
       },
       weights: {
         normal: 400,
@@ -280,22 +290,27 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
       sm: '8px',
       md: '16px',
       lg: '24px',
-      xl: '40px',
-      xxl: '56px'
+      xl: '32px',
+      xxl: '48px'
     },
     borderRadius: {
       none: '0px',
       sm: '0px',
-      md: '0px',
-      lg: '0px',
-      xl: '0px',
-      full: '0px'
+      md: '2px',
+      lg: '4px',
+      xl: '6px',
+      xxl: '8px',
+      full: '50%'
     },
     style: {
       buttonShape: 'rect',
       formField: 'outlined',
       shadow: 'light',
-      hasGradient: false
+      hasGradient: true,
+      gradientDirection: 'horizontal',
+      cardShadow: '0 2px 8px rgba(0,0,0,0.1)',
+      headerHeight: '80px',
+      cardMaxWidth: '560px'
     },
     responsive: {
       mobileBreakpoint: '768px',

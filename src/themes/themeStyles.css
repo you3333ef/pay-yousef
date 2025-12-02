@@ -8,30 +8,33 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #EB5B00;
+  --color-primary: #E31E24;
   --color-secondary: #FF6B35;
   --color-accent: #FFFFFF;
-  --color-background: #F8F9FA;
+  --color-background: #F5F5F5;
   --color-surface: #FFFFFF;
-  --color-text: #212529;
-  --color-text-secondary: #6C757D;
-  --color-border: #DEE2E6;
-  --color-button: #EB5B00;
-  --color-button-hover: #D04E00;
+  --color-text: #1A1A1A;
+  --color-text-secondary: #6B6B6B;
+  --color-border: #E0E0E0;
+  --color-button: #E31E24;
+  --color-button-hover: #C41E3A;
   --color-button-text: #FFFFFF;
   --color-input-bg: #FFFFFF;
-  --color-input-border: #CED4DA;
-  --color-success: #28A745;
-  --color-warning: #FFC107;
-  --color-error: #DC3545;
+  --color-input-border: #CCCCCC;
+  --color-success: #00A651;
+  --color-warning: #FFB81C;
+  --color-error: #E31837;
+  --gradient-from: #E31E24;
+  --gradient-to: #FF6B35;
 
-  --font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
-  --font-size-xs: 11px;
-  --font-size-sm: 13px;
+  --font-family: 'DIN Next', 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
   --font-size-base: 16px;
   --font-size-lg: 18px;
   --font-size-xl: 24px;
   --font-size-xxl: 32px;
+  --font-size-xxxl: 40px;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
@@ -49,12 +52,16 @@
   --radius-md: 6px;
   --radius-lg: 8px;
   --radius-xl: 12px;
+  --radius-xxl: 16px;
   --radius-full: 50%;
 
   --button-shape: rounded;
   --form-field: outlined;
   --shadow-level: light;
-  --has-gradient: 0;
+  --card-shadow: 0 4px 12px rgba(227, 30, 36, 0.08);
+  --header-height: 80px;
+  --card-max-width: 560px;
+  --has-gradient: 1;
   --gradient-direction: horizontal;
 }
 
@@ -274,11 +281,11 @@ p {
     background-color: var(--color-surface);
     border-radius: var(--radius-lg);
     padding: var(--spacing-xl);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: var(--card-shadow);
     border: 1px solid var(--color-border);
     border-left: 8px solid var(--color-primary);
     margin: 0 auto;
-    max-width: 560px;
+    max-width: var(--card-max-width);
     position: relative;
     z-index: 1;
   }
