@@ -1,0 +1,7 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="40" fill="#0052A3"/>
+  <path d="M12 28L18 12H22L16 28H12Z" fill="white"/>
+  <path d="M26 28L32 12H36L30 28H26Z" fill="white"/>
+  <path d="M40 28L46 12H50L44 28H40Z" fill="white"/>
+  <text x="60" y="25" font-family="Arial" font-size="14" font-weight="bold" fill="white">NAQEL EXPRESS</text>
+</svg>

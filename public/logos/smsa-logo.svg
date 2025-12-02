@@ -1,0 +1,6 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="40" fill="#0066CC"/>
+  <path d="M15 12L15 28L20 28L20 15L25 28L30 28L30 12H25L25 22L20 12H15Z" fill="white"/>
+  <path d="M35 28V12H40C43 12 45 13 47 15C49 17 50 20 50 23C50 26 49 29 47 31C45 33 43 34 40 34H35V28ZM40 31C41.5 31 42.5 30.5 43.5 29.5C44.5 28.5 45 27 45 25C45 23 44.5 21.5 43.5 20.5C42.5 19.5 41.5 19 40 19H37V31H40Z" fill="white"/>
+  <text x="60" y="26" font-family="Arial" font-size="16" font-weight="bold" fill="white">SMSA EXPRESS</text>
+</svg>

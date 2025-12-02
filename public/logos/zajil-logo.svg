@@ -1,0 +1,7 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="40" fill="#1C4587"/>
+  <path d="M15 28L20 12H25L20 28H15Z" fill="white"/>
+  <path d="M30 28L35 12H40L35 28H30Z" fill="white"/>
+  <path d="M45 28L50 12H55L50 28H45Z" fill="white"/>
+  <text x="65" y="26" font-family="Arial" font-size="18" font-weight="bold" fill="white">ZAJIL</text>
+</svg>
