@@ -76,11 +76,7 @@ const PaymentDetailsTheme = () => {
   ];
 
   return (
-    <div className="fade-in" style={{
-      minHeight: '100vh',
-      backgroundColor: theme.colors.background,
-      padding: theme.spacing.md,
-    }}>
+    <div className="payment-details-bg wave-pattern fade-in">
       {/* Payment Header with Company Branding */}
       <PaymentHeader
         title="تفاصيل الدفع"

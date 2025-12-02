@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, ReactNode } from 'react';
 import { CompanyTheme, getThemeById } from './themeConfig';
 
-// ===== Types =====
 interface ThemeContextType {
   theme: CompanyTheme | null;
   setTheme: (companyId: string) => void;
@@ -10,10 +9,8 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-// ===== CSS Variables Generator =====
 const generateCSSVariables = (theme: CompanyTheme): React.CSSProperties => {
   return {
-    // Colors
     '--color-primary': theme.colors.primary,
     '--color-secondary': theme.colors.secondary,
     '--color-accent': theme.colors.accent || theme.colors.primary,
@@ -30,8 +27,6 @@ const generateCSSVariables = (theme: CompanyTheme): React.CSSProperties => {
     '--color-success': theme.colors.success || '#28A745',
     '--color-warning': theme.colors.warning || '#FFC107',
     '--color-error': theme.colors.error || '#DC3545',
-
-    // Fonts
     '--font-family': theme.fonts.family,
     '--font-size-xs': theme.fonts.sizes.xs,
     '--font-size-sm': theme.fonts.sizes.sm,
@@ -43,23 +38,18 @@ const generateCSSVariables = (theme: CompanyTheme): React.CSSProperties => {
     '--font-weight-medium': theme.fonts.weights.medium.toString(),
     '--font-weight-semibold': theme.fonts.weights.semibold.toString(),
     '--font-weight-bold': theme.fonts.weights.bold.toString(),
-
-    // Spacing
     '--spacing-xs': theme.spacing.xs,
     '--spacing-sm': theme.spacing.sm,
     '--spacing-md': theme.spacing.md,
     '--spacing-lg': theme.spacing.lg,
     '--spacing-xl': theme.spacing.xl,
     '--spacing-xxl': theme.spacing.xxl,
-
-    // Border Radius
     '--radius-none': theme.borderRadius.none,
     '--radius-sm': theme.borderRadius.sm,
     '--radius-md': theme.borderRadius.md,
     '--radius-lg': theme.borderRadius.lg,
+    '--radius-xl': theme.borderRadius.xl,
     '--radius-full': theme.borderRadius.full,
-
-    // Style Properties
     '--button-shape': theme.style.buttonShape,
     '--form-field': theme.style.formField,
     '--shadow-level': theme.style.shadow,
@@ -68,7 +58,6 @@ const generateCSSVariables = (theme: CompanyTheme): React.CSSProperties => {
   } as React.CSSProperties;
 };
 
-// ===== Theme Provider Component =====
 interface ThemeProviderProps {
   children: ReactNode;
   companyId?: string;
@@ -90,18 +79,15 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     }
   };
 
-  // Load theme from prop or localStorage on mount
   useEffect(() => {
     const themeId = companyId || localStorage.getItem('payment-theme-company-id');
     if (themeId) {
       setTheme(themeId);
     } else {
-      // Default to aramex if no theme is set
       setTheme('aramex');
     }
   }, [companyId]);
 
-  // Apply CSS variables to document root
   useEffect(() => {
     if (theme) {
       const root = document.documentElement;
@@ -111,7 +97,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
         root.style.setProperty(key, value as string);
       });
 
-      // Apply theme-specific classes to body
       document.body.setAttribute('data-theme', theme.id);
       document.body.setAttribute('data-country', theme.country);
       document.body.setAttribute('data-rtl', theme.localization.rtl ? 'true' : 'false');
@@ -131,7 +116,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   );
 };
 
-// ===== Custom Hook =====
 export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext);
   if (context === undefined) {
@@ -140,7 +124,6 @@ export const useTheme = (): ThemeContextType => {
   return context;
 };
 
-// ===== HOC for wrapping pages with theme =====
 interface WithThemeProps {
   companyId: string;
 }

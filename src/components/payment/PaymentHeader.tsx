@@ -149,6 +149,14 @@ export const PaymentHeader: React.FC<PaymentHeaderProps> = ({
           </div>
         )}
       </div>
+
+      {/* Brand Color Bar */}
+      <div
+        className="payment-header__brand-bar"
+        style={{
+          background: `linear-gradient(to right, ${theme.colors.primary}, ${theme.colors.secondary})`,
+        }}
+      />
     </header>
   );
 };
