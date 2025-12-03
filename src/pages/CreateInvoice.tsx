@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Country, COUNTRIES, getCountryByCode } from "@/lib/countries";
-import { ArrowRight, FileText, Plus, Trash2, Download, Send, User } from "lucide-react";
+import { ArrowRight, FileText, Plus, Trash2, Download, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useCreateLink } from "@/hooks/useSupabase";
 
@@ -42,8 +42,6 @@ const CreateInvoice = () => {
     seal: "",
     signature: "",
   });
-
-  const [recipientSenderMode, setRecipientSenderMode] = useState<'recipient' | 'sender'>('recipient');
 
   const [items, setItems] = useState<InvoiceItem[]>([
     {
@@ -110,7 +108,6 @@ const CreateInvoice = () => {
       total: total,
       notes: invoiceData.notes,
       service_type: 'invoices',
-      recipient_sender_mode: recipientSenderMode,
     };
 
     try {
@@ -371,33 +368,6 @@ const CreateInvoice = () => {
                       min="0"
                       max="100"
                     />
-                  </div>
-
-                  {/* Recipient/Sender Mode */}
-                  <div>
-                    <Label className="mb-2 flex items-center gap-2">
-                      <User className="w-3 h-3" />
-                      نوع الدافع *
-                    </Label>
-                    <Select value={recipientSenderMode} onValueChange={(value: 'recipient' | 'sender') => setRecipientSenderMode(value)}>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="recipient">
-                          <div className="flex items-center gap-2">
-                            <User className="w-4 h-4" />
-                            <span>المستلم (COD)</span>
-                          </div>
-                        </SelectItem>
-                        <SelectItem value="sender">
-                          <div className="flex items-center gap-2">
-                            <User className="w-4 h-4" />
-                            <span>المرسل (الدفع المسبق)</span>
-                          </div>
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
                   </div>
                 </div>
               </Card>

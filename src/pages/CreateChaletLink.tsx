@@ -15,7 +15,7 @@ import { getCountryByCode, formatCurrency } from "@/lib/countries";
 import { getBanksByCountry } from "@/lib/banks";
 import { useChalets, useCreateLink } from "@/hooks/useSupabase";
 import { getCurrency, getDefaultTitle } from "@/utils/countryData";
-import { ArrowRight, Home, Copy, Check, Building2, User } from "lucide-react";
+import { ArrowRight, Home, Copy, Check, Building2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const CreateChaletLink = () => {
@@ -32,7 +32,6 @@ const CreateChaletLink = () => {
   const [nights, setNights] = useState<number>(1);
   const [guestCount, setGuestCount] = useState<number>(2);
   const [selectedBank, setSelectedBank] = useState<string>("");
-  const [recipientSenderMode, setRecipientSenderMode] = useState<'recipient' | 'sender'>('recipient');
   const [createdLink, setCreatedLink] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   
@@ -60,7 +59,6 @@ const CreateChaletLink = () => {
       total_amount: totalAmount,
       currency: countryData.currency,
       selected_bank: selectedBank || null,
-      recipient_sender_mode: recipientSenderMode,
     };
 
     try {
@@ -292,34 +290,7 @@ const CreateChaletLink = () => {
                       className="h-9 text-sm"
                     />
                   </div>
-
-                  {/* Recipient/Sender Mode */}
-                  <div>
-                    <Label className="mb-2 flex items-center gap-2 text-sm">
-                      <User className="w-3 h-3" />
-                      نوع الدافع *
-                    </Label>
-                    <Select value={recipientSenderMode} onValueChange={(value: 'recipient' | 'sender') => setRecipientSenderMode(value)}>
-                      <SelectTrigger className="h-9">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="recipient">
-                          <div className="flex items-center gap-2">
-                            <User className="w-4 h-4" />
-                            <span>المستلم (COD)</span>
-                          </div>
-                        </SelectItem>
-                        <SelectItem value="sender">
-                          <div className="flex items-center gap-2">
-                            <User className="w-4 h-4" />
-                            <span>المرسل (الدفع المسبق)</span>
-                          </div>
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
+                  
                   {/* Bank Selection (Optional) */}
                   <div>
                     <Label className="text-sm mb-2 flex items-center gap-2">
