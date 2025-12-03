@@ -7,7 +7,6 @@ import { formatCurrency } from "@/lib/countryCurrencies";
 import { useLink } from "@/hooks/useSupabase";
 import { User, Mail, Phone, MapPin, ArrowLeft, Package } from "lucide-react";
 import RecipientSenderToggle from "@/components/RecipientSenderToggle";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 const PaymentRecipientSender = () => {
   const { id } = useParams();
@@ -170,16 +169,13 @@ const PaymentRecipientSender = () => {
               />
             )}
           </div>
-          <div className="flex items-center gap-2">
-            <div className="text-right">
-              <h1 className="text-lg sm:text-xl font-bold text-gray-900">
-                {companyData?.name || 'Shipping'}
-              </h1>
-              <p className="text-xs sm:text-sm text-gray-600">
-                Secure {dataType} data collection
-              </p>
-            </div>
-            <ThemeToggle className="ml-2" />
+          <div className="text-right">
+            <h1 className="text-lg sm:text-xl font-bold text-gray-900">
+              {companyData?.name || 'Shipping'}
+            </h1>
+            <p className="text-xs sm:text-sm text-gray-600">
+              Secure {dataType} data collection
+            </p>
           </div>
         </div>
         {/* Brand Bar */}

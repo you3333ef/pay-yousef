@@ -1243,6 +1243,59 @@ export const SHIPPING_COMPANIES: Record<string, ShippingCompany> = {
     },
   },
 
+  jiynakum: {
+    id: 'jiynakum',
+    name: 'Jiynakum',
+    nameAr: 'جيناكم',
+    logo: '/logos/jiynakum.svg',
+    colors: {
+      primary: '#2E7D32',
+      secondary: '#66BB6A',
+      accent: '#FFFFFF',
+      background: 'linear-gradient(180deg, #FFF 0%, #F0FFF0 100%)',
+      cardBg: '#FFFFFF',
+      textPrimary: '#1A1A1A',
+      textSecondary: '#6B6B6B',
+      border: '#E0E0E0',
+    },
+    typography: {
+      primary: 'Jiynakum',
+      secondary: "'Cairo', 'Tajawal', sans-serif",
+    },
+    countries: ['OM'],
+    officialColors: {
+      primary: '#2E7D32',
+      secondary: '#66BB6A',
+      gradient: 'linear-gradient(135deg, #2E7D32, #66BB6A)',
+      background: 'linear-gradient(180deg, #FFF 0%, #F0FFF0 100%)',
+    },
+    fontFamily: "'Cairo', 'Tajawal', sans-serif",
+    description: 'Oman logistics and delivery service',
+    isActive: true,
+    styling: {
+      buttonStyle: {
+        padding: '16px 32px',
+        borderRadius: '8px',
+        fontWeight: '600',
+        textTransform: 'none',
+      },
+      headerStyle: {
+        height: '80px',
+        padding: '0 24px',
+        boxShadow: '0 2px 8px rgba(46, 125, 50, 0.08)',
+      },
+      cardStyle: {
+        padding: '32px',
+        borderRadius: '12px',
+        border: '1px solid #E0E0E0',
+      },
+    },
+    assets: {
+      heroImage: '/assets/hero-jiynakum.jpg',
+      pattern: '/assets/patterns/jiynakum-pattern.svg',
+    },
+  },
+
   // ========================================
   // AUSTRALIA
   // ========================================

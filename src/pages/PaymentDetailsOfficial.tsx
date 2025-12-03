@@ -5,7 +5,6 @@ import { getCountryByCode } from "@/lib/countries";
 import { formatCurrency, getCurrencyByCountry } from "@/lib/countryCurrencies";
 import { getCompanyById } from "@/lib/shippingCompanies";
 import { CreditCard, ArrowLeft, Hash, DollarSign, Package, Truck } from "lucide-react";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 const PaymentDetailsOfficial = () => {
   const { id } = useParams();
@@ -115,16 +114,13 @@ const PaymentDetailsOfficial = () => {
               className="h-8 sm:h-12 w-auto object-contain"
             />
           </div>
-          <div className="flex items-center gap-2">
-            <div className="text-right">
-              <h1 className="text-lg sm:text-xl font-bold" style={{ color: companyStyles.primaryText }}>
-                {serviceName}
-              </h1>
-              <p className="text-xs sm:text-sm" style={{ color: companyStyles.secondaryText }}>
-                خدمة الدفع الآمن
-              </p>
-            </div>
-            <ThemeToggle className="ml-2" />
+          <div className="text-right">
+            <h1 className="text-lg sm:text-xl font-bold" style={{ color: companyStyles.primaryText }}>
+              {serviceName}
+            </h1>
+            <p className="text-xs sm:text-sm" style={{ color: companyStyles.secondaryText }}>
+              خدمة الدفع الآمن
+            </p>
           </div>
         </div>
         {/* Brand Bar */}
