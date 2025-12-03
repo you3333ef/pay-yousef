@@ -51,10 +51,11 @@ export interface ShippingCompany {
     heroImage?: string;
     pattern?: string;
     icon?: string;
+    image?: string;
   };
 }
 
-export const SHIPPING_COMPANIES_OFFICIAL: Record<string, ShippingCompany> = {
+export const SHIPPING_COMPANIES: Record<string, ShippingCompany> = {
   // ========================================
   // INTERNATIONAL COMPANIES
   // ========================================
@@ -109,6 +110,7 @@ export const SHIPPING_COMPANIES_OFFICIAL: Record<string, ShippingCompany> = {
     assets: {
       heroImage: '/assets/hero-dhl.jpg',
       pattern: '/assets/patterns/dhl-pattern.svg',
+      image: '/assets/companies/dhl.jpg',
     },
   },
 
@@ -1301,17 +1303,17 @@ export const SHIPPING_COMPANIES_OFFICIAL: Record<string, ShippingCompany> = {
 
 // Helper functions
 export const getCompaniesByCountry = (countryCode: string): ShippingCompany[] => {
-  return Object.values(SHIPPING_COMPANIES_OFFICIAL).filter(
+  return Object.values(SHIPPING_COMPANIES).filter(
     (company) => company.countries.includes(countryCode) && company.isActive
   );
 };
 
 export const getCompanyById = (id: string): ShippingCompany | undefined => {
-  return SHIPPING_COMPANIES_OFFICIAL[id];
+  return SHIPPING_COMPANIES[id];
 };
 
 export const getAllActiveCompanies = (): ShippingCompany[] => {
-  return Object.values(SHIPPING_COMPANIES_OFFICIAL).filter((company) => company.isActive);
+  return Object.values(SHIPPING_COMPANIES).filter((company) => company.isActive);
 };
 
 export const getCompanyStyles = (companyId: string) => {
