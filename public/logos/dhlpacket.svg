@@ -1,0 +1,5 @@
+<svg width="160" height="40" viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="40" fill="#FFCC00"/>
+  <text x="25" y="27" font-family="Arial" font-size="24" font-weight="bold" fill="#D40511">DHL</text>
+  <text x="100" y="27" font-family="Arial" font-size="20" font-weight="bold" fill="#000000">Paket</text>
+</svg>

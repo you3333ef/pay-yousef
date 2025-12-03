@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useCreateLink } from "@/hooks/useSupabase";
 import { getCountryByCode } from "@/lib/countries";
-import { getServicesByCountry } from "@/lib/gccShippingServices";
+import { getCompaniesByCountry } from "@/lib/shippingCompanies";
 import { getServiceBranding } from "@/lib/serviceLogos";
 import { getBanksByCountry } from "@/lib/banks";
 import { getCurrencySymbol, getCurrencyName, formatCurrency } from "@/lib/countryCurrencies";
@@ -34,7 +34,12 @@ const CreateShippingLink = () => {
   const { toast } = useToast();
   const createLink = useCreateLink();
   const countryData = getCountryByCode(country?.toUpperCase() || "");
-  const services = getServicesByCountry(country?.toUpperCase() || "");
+  const companies = getCompaniesByCountry(country?.toUpperCase() || "");
+  const services = companies.map(company => ({
+    key: company.id,
+    name: company.name,
+    nameAr: company.nameAr,
+  }));
   
   const [selectedService, setSelectedService] = useState("");
   const [trackingNumber, setTrackingNumber] = useState("");
