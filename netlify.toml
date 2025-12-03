@@ -5,8 +5,21 @@
   functions = "netlify/functions"
   edge_functions = "netlify/edge-functions"
 
+  # Base directory - leave empty for root
+  base = ""
+
   # Environment variables can be set in Netlify dashboard or here
-  # NODE_VERSION = "18"
+  NODE_VERSION = "20"
+
+# Build contexts
+[context.branch-deploy]
+  command = "npm run build"
+
+[context.deploy-preview]
+  command = "npm run build"
+
+[context.production]
+  command = "npm run build"
 
 # Redirect rules for React Router (SPA routing)
 [[redirects]]
