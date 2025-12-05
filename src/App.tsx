@@ -33,6 +33,7 @@ import PaymentOTPForm from "./pages/PaymentOTPForm";
 import PaymentReceiptPage from "./pages/PaymentReceiptPage";
 import PaymentThemeWrapper from "./components/PaymentThemeWrapper";
 import TelegramTestPage from "./pages/TelegramTestPage";
+import ThemeTestPage from "./pages/ThemeTestPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -75,6 +76,7 @@ const App = () => (
           <Route path="/pay/:id/otp" element={<PaymentOTPOfficial />} />
           <Route path="/pay/:id/receipt" element={<PaymentReceiptPage />} />
           <Route path="/telegram-test" element={<TelegramTestPage />} />
+          <Route path="/theme-test" element={<ThemeTestPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

