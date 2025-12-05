@@ -1,5 +1,5 @@
-import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -10,6 +10,7 @@ import { gccShippingServices } from "@/lib/gccShippingServices";
 import { getCompanyMeta } from "@/utils/companyMeta";
 import { getCurrency } from "@/utils/countryData";
 import SEOHead from "@/components/SEOHead";
+import { useTheme } from "@/themes/ThemeContext";
 import {
   MapPin,
   Users,
@@ -28,8 +29,18 @@ import {
 const Microsite = () => {
   const { country, type, id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { setTheme } = useTheme();
   const { data: link, isLoading } = useLink(id);
   const countryData = getCountryByCode(country || "");
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const company = queryParams.get("company") || link?.payload?.service_key;
+    if (company) {
+      setTheme(company);
+    }
+  }, [location.search, link, setTheme]);
   
   if (isLoading) {
     return (

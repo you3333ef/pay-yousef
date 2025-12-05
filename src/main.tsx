@@ -3,6 +3,7 @@ import { HelmetProvider } from "react-helmet-async";
 import App from "./App.tsx";
 import "./index.css";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import ThemeProvider from "./themes/ThemeContext.tsx";
 
 // Register service worker for PWA (only in production)
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
@@ -44,7 +45,9 @@ try {
   root.render(
     <HelmetProvider>
       <ErrorBoundary>
-        <App />
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
       </ErrorBoundary>
     </HelmetProvider>
   );
