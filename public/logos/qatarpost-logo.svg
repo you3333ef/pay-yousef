@@ -1,5 +1,15 @@
-<svg width="140" height="40" viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="140" height="40" fill="#8E1838"/>
-  <path d="M15 12L15 28L20 28L20 18L25 28L30 28L30 12H25L25 22L20 12H15Z" fill="white"/>
-  <text x="50" y="26" font-family="Arial" font-size="16" font-weight="bold" fill="white">QATAR POST</text>
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="334.000000pt" height="105.000000pt" viewBox="0 0 334.000000 105.000000"
+ preserveAspectRatio="xMidYMid meet">
+<metadata>
+Created by potrace 1.16, written by Peter Selinger 2001-2019
+</metadata>
+<g transform="translate(0.000000,105.000000) scale(0.100000,-0.100000)"
+fill="#000000" stroke="none">
+<path d="M30 525 l0 -375 490 0 490 0 0 375 0 375 -490 0 -490 0 0 -375z"/>
+<path d="M1110 475 l0 -115 1100 0 1100 0 0 115 0 115 -1100 0 -1100 0 0 -115z"/>
+</g>
 </svg>

@@ -88,10 +88,10 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     name: 'Aramex',
     nameAr: 'أرامكس',
     country: 'UAE',
-    logo: '/logos/aramex.svg',
+    logo: '/logos/aramex-logo.svg',
     logoDark: '/logos/aramex-dark.svg',
     colors: {
-      primary: '#E31E24',
+      primary: '#dc291e',
       secondary: '#FF6B35',
       accent: '#FFFFFF',
       background: '#F5F5F5',
@@ -99,8 +99,8 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
       text: '#1A1A1A',
       textSecondary: '#6B6B6B',
       border: '#E0E0E0',
-      button: '#E31E24',
-      buttonHover: '#C41E3A',
+      button: '#dc291e',
+      buttonHover: '#b02118',
       buttonText: '#FFFFFF',
       inputBg: '#FFFFFF',
       inputBorder: '#CCCCCC',
@@ -170,7 +170,7 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     name: 'Aramex Gulf',
     nameAr: 'أرامكس الخليج',
     country: 'GULF',
-    logo: '/logos/aramex-gulf.svg',
+    logo: '/logos/aramex-gulf-logo.svg',
     logoDark: '/logos/aramex-gulf-dark.svg',
     colors: {
       primary: '#EB5B00',
@@ -245,12 +245,12 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     name: 'DHL',
     nameAr: 'دي إتش إل',
     country: 'UAE',
-    logo: '/logos/dhl.svg',
+    logo: '/logos/dhl-logo.svg',
     logoDark: '/logos/dhl-dark.svg',
     colors: {
       primary: '#FFCC00',
       secondary: '#D40511',
-      accent: '#FF0000',
+      accent: '#FFCC00',
       background: '#FAFAFA',
       surface: '#FFFFFF',
       text: '#000000',
@@ -327,11 +327,11 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     name: 'FedEx',
     nameAr: 'فيديكس',
     country: 'UAE',
-    logo: '/logos/fedex.svg',
+    logo: '/logos/fedex-logo.svg',
     logoDark: '/logos/fedex-dark.svg',
     colors: {
-      primary: '#4D148C',
-      secondary: '#FF6600',
+      primary: '#4d148c',
+      secondary: '#ff6200',
       accent: '#FFFFFF',
       background: '#FAFAFA',
       surface: '#FFFFFF',
@@ -401,11 +401,11 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     name: 'UPS',
     nameAr: 'يو بي إس',
     country: 'UAE',
-    logo: '/logos/ups.svg',
+    logo: '/logos/ups-logo.svg',
     logoDark: '/logos/ups-dark.svg',
     colors: {
-      primary: '#351C15',
-      secondary: '#FFB500',
+      primary: '#301504',
+      secondary: '#FCB900',
       accent: '#FFFFFF',
       background: '#FFFFFF',
       surface: '#F8F8F8',
@@ -422,7 +422,7 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
       error: '#E31837'
     },
     fonts: {
-      family: "'UPS', 'Arial', 'Helvetica', sans-serif",
+      family: "'Yanone Kaffeesatz', 'Arial', 'Helvetica', sans-serif",
       sizes: {
         xs: '11px',
         sm: '13px',
@@ -475,18 +475,18 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     name: 'Emirates Post',
     nameAr: 'بريد الإمارات',
     country: 'UAE',
-    logo: '/logos/empost.svg',
+    logo: '/logos/empost-logo.svg',
     logoDark: '/logos/empost-dark.svg',
     colors: {
-      primary: '#C8102E',
-      secondary: '#003087',
+      primary: '#D2122E', // Emirates Red
+      secondary: '#000000', // Black
       accent: '#FFFFFF',
       background: '#F5F7FA',
       surface: '#FFFFFF',
       text: '#1A1A1A',
       textSecondary: '#5A5A5A',
       border: '#E0E0E0',
-      button: '#C8102E',
+      button: '#D2122E',
       buttonHover: '#A80D26',
       buttonText: '#FFFFFF',
       inputBg: '#FFFFFF',
@@ -496,7 +496,7 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
       error: '#DC3545'
     },
     fonts: {
-      family: "'Emirates Post', 'Cairo', 'Arial', sans-serif",
+      family: "'Cairo', 'Arial', sans-serif",
       sizes: {
         xs: '11px',
         sm: '13px',
@@ -551,19 +551,19 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     name: 'SMSA Express',
     nameAr: 'شركة سمسا اكسبريس',
     country: 'SA',
-    logo: '/logos/smsa.svg',
+    logo: '/logos/smsa-logo.svg',
     logoDark: '/logos/smsa-dark.svg',
     colors: {
-      primary: '#0066CC',
-      secondary: '#FF6600',
+      primary: '#FF6600', // SMSA Orange
+      secondary: '#00529B', // SMSA Blue
       accent: '#FFFFFF',
       background: '#F8F9FA',
       surface: '#FFFFFF',
       text: '#1A1A1A',
       textSecondary: '#5A5A5A',
       border: '#E0E0E0',
-      button: '#0066CC',
-      buttonHover: '#0052A3',
+      button: '#FF6600',
+      buttonHover: '#E65C00',
       buttonText: '#FFFFFF',
       inputBg: '#FFFFFF',
       inputBorder: '#CCCCCC',
@@ -572,7 +572,7 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
       error: '#DC3545'
     },
     fonts: {
-      family: "'Cairo', 'Tajawal', 'Arial', sans-serif",
+      family: "'Cairo', 'Arial', sans-serif",
       sizes: {
         xs: '11px',
         sm: '13px',
@@ -625,19 +625,19 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     name: 'Zajil',
     nameAr: 'زاجل',
     country: 'SA',
-    logo: '/logos/zajil.svg',
+    logo: '/logos/zajil-logo.svg',
     logoDark: '/logos/zajil-dark.svg',
     colors: {
-      primary: '#1C4587',
-      secondary: '#FF9900',
+      primary: '#00AEEF', // Zajil Blue
+      secondary: '#FFFFFF',
       accent: '#FFFFFF',
       background: '#F8F9FA',
       surface: '#FFFFFF',
       text: '#1A1A1A',
       textSecondary: '#5A5A5A',
       border: '#E0E0E0',
-      button: '#1C4587',
-      buttonHover: '#153764',
+      button: '#00AEEF',
+      buttonHover: '#009CDD',
       buttonText: '#FFFFFF',
       inputBg: '#FFFFFF',
       inputBorder: '#CCCCCC',
@@ -646,7 +646,7 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
       error: '#E4002B'
     },
     fonts: {
-      family: "'Zajil', 'Cairo', 'Arial', sans-serif",
+      family: "'Cairo', 'Arial', sans-serif",
       sizes: {
         xs: '11px',
         sm: '13px',
@@ -699,19 +699,19 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     name: 'Naqel Express',
     nameAr: 'شركة ناقل إكسبرس',
     country: 'SA',
-    logo: '/logos/naqel.svg',
+    logo: '/logos/naqel-logo.svg',
     logoDark: '/logos/naqel-dark.svg',
     colors: {
-      primary: '#0052A3',
-      secondary: '#FF6B00',
+      primary: '#D9232D', // Naqel Red
+      secondary: '#000000', // Black
       accent: '#FFFFFF',
       background: '#F8F9FA',
       surface: '#FFFFFF',
       text: '#1A1A1A',
       textSecondary: '#5A5A5A',
       border: '#E0E0E0',
-      button: '#0052A3',
-      buttonHover: '#004082',
+      button: '#D9232D',
+      buttonHover: '#B61C25',
       buttonText: '#FFFFFF',
       inputBg: '#FFFFFF',
       inputBorder: '#CCCCCC',
@@ -720,7 +720,7 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
       error: '#DC3545'
     },
     fonts: {
-      family: "'Naqel', 'Cairo', 'Arial', sans-serif",
+      family: "'Cairo', 'Arial', sans-serif",
       sizes: {
         xs: '11px',
         sm: '13px',
@@ -773,19 +773,19 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     name: 'Saudi Post',
     nameAr: 'بريد السعودية',
     country: 'SA',
-    logo: '/logos/saudipost.svg',
+    logo: '/logos/saudipost-logo.svg',
     logoDark: '/logos/saudipost-dark.svg',
     colors: {
-      primary: '#006C35',
-      secondary: '#FFB81C',
+      primary: '#00A651', // Saudi Post Green
+      secondary: '#FFFFFF',
       accent: '#FFFFFF',
       background: '#F8F9FA',
       surface: '#FFFFFF',
       text: '#1A1A1A',
       textSecondary: '#5A5A5A',
       border: '#E0E0E0',
-      button: '#006C35',
-      buttonHover: '#00532A',
+      button: '#00A651',
+      buttonHover: '#008743',
       buttonText: '#FFFFFF',
       inputBg: '#FFFFFF',
       inputBorder: '#CCCCCC',
@@ -794,7 +794,7 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
       error: '#DC3545'
     },
     fonts: {
-      family: "'Saudi Post', 'Cairo', 'Arial', sans-serif",
+      family: "'Cairo', 'Arial', sans-serif",
       sizes: {
         xs: '11px',
         sm: '13px',
@@ -848,18 +848,18 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     name: 'Kuwait Post',
     nameAr: 'بريد الكويت',
     country: 'KW',
-    logo: '/logos/kwpost.svg',
+    logo: '/logos/kuwaitpost-logo.svg',
     logoDark: '/logos/kwpost-dark.svg',
     colors: {
-      primary: '#007A33',
-      secondary: '#DA291C',
+      primary: '#007A3D', // Kuwait Green
+      secondary: '#CE1126', // Kuwait Red
       accent: '#FFFFFF',
       background: '#F8F9FA',
       surface: '#FFFFFF',
       text: '#1A1A1A',
       textSecondary: '#5A5A5A',
       border: '#E0E0E0',
-      button: '#007A33',
+      button: '#007A3D',
       buttonHover: '#005D26',
       buttonText: '#FFFFFF',
       inputBg: '#FFFFFF',
@@ -869,7 +869,7 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
       error: '#DC3545'
     },
     fonts: {
-      family: "'Kuwait Post', 'Cairo', 'Arial', sans-serif",
+      family: "'Cairo', 'Arial', sans-serif",
       sizes: {
         xs: '11px',
         sm: '13px',
@@ -923,18 +923,18 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     name: 'Qatar Post',
     nameAr: 'بريد قطر',
     country: 'QA',
-    logo: '/logos/qpost.svg',
+    logo: '/logos/qatarpost-logo.svg',
     logoDark: '/logos/qpost-dark.svg',
     colors: {
-      primary: '#8E1838',
+      primary: '#8D1B3D', // Qatar Maroon
       secondary: '#FFFFFF',
-      accent: '#8E1838',
+      accent: '#8D1B3D',
       background: '#F8F9FA',
       surface: '#FFFFFF',
       text: '#1A1A1A',
       textSecondary: '#5A5A5A',
       border: '#E0E0E0',
-      button: '#8E1838',
+      button: '#8D1B3D',
       buttonHover: '#6E132B',
       buttonText: '#FFFFFF',
       inputBg: '#FFFFFF',
@@ -944,7 +944,7 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
       error: '#DC3545'
     },
     fonts: {
-      family: "'Qatar Post', 'Cairo', 'Arial', sans-serif",
+      family: "'Cairo', 'Arial', sans-serif",
       sizes: {
         xs: '11px',
         sm: '13px',
@@ -998,19 +998,19 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     name: 'Oman Post',
     nameAr: 'بريد عمان',
     country: 'OM',
-    logo: '/logos/omanpost.svg',
+    logo: '/logos/omanpost-logo.svg',
     logoDark: '/logos/omanpost-dark.svg',
     colors: {
-      primary: '#ED1C24',
-      secondary: '#009639',
+      primary: '#D7282F', // Oman Red
+      secondary: '#008B45', // Oman Green
       accent: '#FFFFFF',
       background: '#F8F9FA',
       surface: '#FFFFFF',
       text: '#1A1A1A',
       textSecondary: '#5A5A5A',
       border: '#E0E0E0',
-      button: '#ED1C24',
-      buttonHover: '#C0161D',
+      button: '#D7282F',
+      buttonHover: '#B02026',
       buttonText: '#FFFFFF',
       inputBg: '#FFFFFF',
       inputBorder: '#CCCCCC',
@@ -1019,7 +1019,7 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
       error: '#DC3545'
     },
     fonts: {
-      family: "'Oman Post', 'Cairo', 'Arial', sans-serif",
+      family: "'Cairo', 'Arial', sans-serif",
       sizes: {
         xs: '11px',
         sm: '13px',
@@ -1073,18 +1073,18 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
     name: 'Bahrain Post',
     nameAr: 'بريد البحرين',
     country: 'BH',
-    logo: '/logos/bahpost.svg',
+    logo: '/logos/bahpost-logo.svg',
     logoDark: '/logos/bahpost-dark.svg',
     colors: {
-      primary: '#CE1126',
+      primary: '#DA291C', // Bahrain Red
       secondary: '#FFFFFF',
-      accent: '#CE1126',
+      accent: '#DA291C',
       background: '#F8F9FA',
       surface: '#FFFFFF',
       text: '#1A1A1A',
       textSecondary: '#5A5A5A',
       border: '#E0E0E0',
-      button: '#CE1126',
+      button: '#DA291C',
       buttonHover: '#A80E1D',
       buttonText: '#FFFFFF',
       inputBg: '#FFFFFF',
@@ -1094,7 +1094,7 @@ export const SHIPPING_COMPANY_THEMES: Record<string, CompanyTheme> = {
       error: '#DC3545'
     },
     fonts: {
-      family: "'Bahrain Post', 'Cairo', 'Arial', sans-serif",
+      family: "'Cairo', 'Arial', sans-serif",
       sizes: {
         xs: '11px',
         sm: '13px',
