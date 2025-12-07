@@ -1243,6 +1243,165 @@ export const SHIPPING_COMPANIES: Record<string, ShippingCompany> = {
     },
   },
 
+  tamex: {
+    id: 'tamex',
+    name: 'Tamex',
+    nameAr: 'تامكس',
+    logo: '/logos/tamex.svg',
+    colors: {
+      primary: '#1E40AF',
+      secondary: '#F59E0B',
+      accent: '#FFFFFF',
+      background: 'linear-gradient(180deg, #FFF 0%, #F0F5FF 100%)',
+      cardBg: '#FFFFFF',
+      textPrimary: '#1A1A1A',
+      textSecondary: '#6B6B6B',
+      border: '#E0E0E0',
+    },
+    typography: {
+      primary: 'Tamex',
+      secondary: "'Cairo', 'Tajawal', sans-serif",
+    },
+    countries: ['SA'],
+    officialColors: {
+      primary: '#1E40AF',
+      secondary: '#F59E0B',
+      gradient: 'linear-gradient(135deg, #1E40AF, #F59E0B)',
+      background: 'linear-gradient(180deg, #FFF 0%, #F0F5FF 100%)',
+    },
+    fontFamily: "'Cairo', 'Tajawal', sans-serif",
+    description: 'Saudi logistics and delivery service',
+    isActive: true,
+    styling: {
+      buttonStyle: {
+        padding: '16px 32px',
+        borderRadius: '8px',
+        fontWeight: '600',
+        textTransform: 'none',
+      },
+      headerStyle: {
+        height: '80px',
+        padding: '0 24px',
+        boxShadow: '0 2px 8px rgba(30, 64, 175, 0.08)',
+      },
+      cardStyle: {
+        padding: '32px',
+        borderRadius: '12px',
+        border: '1px solid #E0E0E0',
+      },
+    },
+    assets: {
+      heroImage: '/assets/hero-tamex.jpg',
+      pattern: '/assets/patterns/tamex-pattern.svg',
+    },
+  },
+
+  imile: {
+    id: 'imile',
+    name: 'iMile',
+    nameAr: 'آي مايل',
+    logo: '/logos/imile.svg',
+    colors: {
+      primary: '#FF6600',
+      secondary: '#0033A0',
+      accent: '#FFFFFF',
+      background: 'linear-gradient(180deg, #FFF 0%, #FFF5F0 100%)',
+      cardBg: '#FFFFFF',
+      textPrimary: '#1A1A1A',
+      textSecondary: '#6B6B6B',
+      border: '#E0E0E0',
+    },
+    typography: {
+      primary: 'iMile',
+      secondary: "'Poppins', 'Cairo', sans-serif",
+    },
+    countries: ['SA', 'AE', 'KW', 'QA', 'OM', 'BH'],
+    officialColors: {
+      primary: '#FF6600',
+      secondary: '#0033A0',
+      gradient: 'linear-gradient(135deg, #FF6600, #0033A0)',
+      background: 'linear-gradient(180deg, #FFF 0%, #FFF5F0 100%)',
+    },
+    fontFamily: "'Poppins', 'Cairo', sans-serif",
+    description: 'Middle East e-commerce logistics',
+    isActive: true,
+    styling: {
+      buttonStyle: {
+        padding: '16px 32px',
+        borderRadius: '8px',
+        fontWeight: '600',
+        textTransform: 'none',
+      },
+      headerStyle: {
+        height: '80px',
+        padding: '0 24px',
+        boxShadow: '0 2px 8px rgba(255, 102, 0, 0.08)',
+      },
+      cardStyle: {
+        padding: '32px',
+        borderRadius: '12px',
+        border: '1px solid #E0E0E0',
+      },
+    },
+    assets: {
+      heroImage: '/assets/hero-imile.jpg',
+      pattern: '/assets/patterns/imile-pattern.svg',
+    },
+  },
+
+  barq: {
+    id: 'barq',
+    name: 'Barq',
+    nameAr: 'برق',
+    logo: '/logos/barq.svg',
+    colors: {
+      primary: '#00AEEF',
+      secondary: '#1A1A1A',
+      accent: '#FFFFFF',
+      background: 'linear-gradient(180deg, #FFF 0%, #F0FAFF 100%)',
+      cardBg: '#FFFFFF',
+      textPrimary: '#1A1A1A',
+      textSecondary: '#6B6B6B',
+      border: '#E0E0E0',
+    },
+    typography: {
+      primary: 'Barq',
+      secondary: "'Cairo', 'Tajawal', sans-serif",
+    },
+    countries: ['SA'],
+    officialColors: {
+      primary: '#00AEEF',
+      secondary: '#1A1A1A',
+      gradient: 'linear-gradient(135deg, #00AEEF, #1A1A1A)',
+      background: 'linear-gradient(180deg, #FFF 0%, #F0FAFF 100%)',
+    },
+    fontFamily: "'Cairo', 'Tajawal', sans-serif",
+    description: 'Last-mile delivery service',
+    isActive: true,
+    styling: {
+      buttonStyle: {
+        padding: '16px 32px',
+        borderRadius: '8px',
+        fontWeight: '600',
+        textTransform: 'none',
+      },
+      headerStyle: {
+        height: '80px',
+        padding: '0 24px',
+        boxShadow: '0 2px 8px rgba(0, 174, 239, 0.08)',
+      },
+      cardStyle: {
+        padding: '32px',
+        borderRadius: '12px',
+        border: '1px solid #E0E0E0',
+      },
+    },
+    assets: {
+      heroImage: '/assets/hero-barq.jpg',
+      pattern: '/assets/patterns/barq-pattern.svg',
+    },
+  },
+
   jiynakum: {
     id: 'jiynakum',
     name: 'Jiynakum',
